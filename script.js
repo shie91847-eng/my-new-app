@@ -29,61 +29,67 @@ const typeText = {
 
 const typeProfiles = {
   study: {
-    scene: '学习内容',
-    first: ['打开最相关的一页', '只看目录或标题', '标出一个最小范围'],
-    focus: ['整理三个关键词', '做一道代表性练习', '把一个概念讲给自己听'],
-    close: ['写一句今天看懂了什么', '标出下次继续的位置', '把最容易忘的点写到旁边'],
+    cue: '先把内容变小，再让记忆有落点。',
+    first: ['打开最相关的一页', '只看标题和小标题', '圈出一个最小范围', '找出最像考点的一小块'],
+    focus: ['整理三个关键词', '做一道代表性练习', '把一个概念讲给自己听', '用问题—答案的形式写两行'],
+    close: ['写一句今天看懂了什么', '标出下次继续的位置', '把最容易忘的点写到旁边', '给这个小范围起一个标题'],
   },
   writing: {
-    scene: '文档',
-    first: ['打开文档并写下题目', '列出三个关键词', '写一句很粗糙的开头'],
-    focus: ['补三个小标题', '每个小标题下写一句话', '先写最容易的一段'],
-    close: ['保留最顺的一句', '给下一段留一个提示词', '把不确定的地方先标出来'],
+    cue: '先有草稿，再谈好坏。空白被填上一点，阻力就会变小。',
+    first: ['打开文档并写下题目', '列出三个关键词', '写一句很粗糙的开头', '把要表达的意思先写成口语'],
+    focus: ['补三个小标题', '每个小标题下写一句话', '先写最容易的一段', '把一个模糊想法扩成三句话'],
+    close: ['保留最顺的一句', '给下一段留一个提示词', '把不确定的地方先标出来', '写下下一次要接着写的位置'],
   },
   life: {
-    scene: '空间或物品',
-    first: ['只选一个手边角落', '拿起离你最近的一样东西', '准备一个临时收纳处'],
-    focus: ['只处理五样东西', '分成留下、移走、丢弃', '把一个表面清出来'],
-    close: ['让一个小区域恢复清爽', '把剩下的东西集中到一处', '拍下或看一眼完成后的角落'],
+    cue: '生活任务不必一次恢复秩序，先让一个小角落变轻。',
+    first: ['只选一个手边角落', '拿起离你最近的一样东西', '准备一个临时收纳处', '先清出一个能放东西的平面'],
+    focus: ['只处理五样东西', '分成留下、移走、丢弃', '把一个表面清出来', '只完成一个区域的归位'],
+    close: ['让一个小区域恢复清爽', '把剩下的东西集中到一处', '看一眼完成后的角落', '写下明天只需要继续哪里'],
   },
   creative: {
-    scene: '项目',
-    first: ['写下核心想法', '画一个很粗的结构', '只决定第一屏或第一段'],
-    focus: ['推进一个可见模块', '做一个低精度版本', '先完成一个能被展示的小片段'],
-    close: ['保存当前版本', '写下下次要改的一点', '保留一个不急着打磨的草稿'],
+    cue: '创作先不追求完整，先让轮廓出现。',
+    first: ['写下核心想法', '画一个很粗的结构', '只决定第一屏或第一段', '列出三个你想保留的感觉'],
+    focus: ['推进一个可见模块', '做一个低精度版本', '先完成一个能被展示的小片段', '只打磨最影响观感的一处'],
+    close: ['保存当前版本', '写下下次要改的一点', '保留一个不急着打磨的草稿', '给当前版本起一个临时名字'],
   },
   admin: {
-    scene: '事务',
-    first: ['找到入口页面或材料', '确认截止时间', '列出需要谁或什么信息'],
-    focus: ['只填最确定的部分', '发出一个询问或确认', '完成一个能被提交的小步骤'],
-    close: ['写清下一步等什么', '保存凭证或链接', '把未完成原因记下来'],
+    cue: '事务类任务最怕混在一起，先把入口、材料、下一步分开。',
+    first: ['找到入口页面或材料', '确认截止时间', '列出需要谁或什么信息', '先打开相关页面并停在那里'],
+    focus: ['只填最确定的部分', '发出一个询问或确认', '完成一个能被提交的小步骤', '把缺失材料单独列出来'],
+    close: ['写清下一步等什么', '保存凭证或链接', '把未完成原因记下来', '把下一次要做的动作写成一句话'],
   },
 };
 
 const blockerStrategies = {
   'too-big': {
     intro: '不是你不够努力，是边界太宽。先把整片森林收成一条小径。',
-    titles: ['把全部缩成一角', '只走一小段', '留下路标'],
+    titles: ['收窄边界', '推进一小段', '留下路标'],
+    principle: '只保留一个小范围，暂时不碰其余部分。',
   },
   'cant-start': {
     intro: '开始不需要状态很好。先让身体到场，心会慢一点跟上。',
-    titles: ['只打开入口', '试运行十分钟', '停在好继续的位置'],
+    titles: ['打开入口', '试运行十分钟', '停在好继续的位置'],
+    principle: '把“完成”换成“进入现场”。',
   },
   fear: {
     intro: '怕做差时，先允许它粗糙。可修改的东西，必须先存在。',
-    titles: ['做一个低标准草稿', '只修一处', '保留可见进展'],
+    titles: ['做低标准版本', '只修一处', '保留可见进展'],
+    principle: '先生成一个不完美版本，再决定是否修改。',
   },
   'low-energy': {
     intro: '能量低时，不需要冲刺。只取回一点点掌控感。',
-    titles: ['做一个不会失败的动作', '温和推进一点', '及时收住'],
+    titles: ['选省力入口', '轻轻推进', '及时收住'],
+    principle: '把动作降到几乎不会失败。',
   },
   messy: {
     intro: '混乱时先别排序。让脑内的雨落到纸面上，再选一滴。',
-    titles: ['先清空噪音', '只选一个入口', '写清下一步'],
+    titles: ['清空噪音', '挑一个入口', '写清下一步'],
+    principle: '先外化，再选择；不要在脑子里硬排。',
   },
   'little-time': {
     intro: '时间少时，不做完整计划。只抓最有回声的一小块。',
     titles: ['锁定关键小块', '做高价值推进', '留下可交接结果'],
+    principle: '只做最能减少后续阻力的一步。',
   },
 };
 
@@ -103,6 +109,13 @@ function setChoice(containerId, key) {
   });
 }
 
+function preloadBackground() {
+  const img = new Image();
+  img.src = './IMG_20260506_123026.jpg';
+  img.onload = () => document.documentElement.classList.add('bg-ready');
+  img.onerror = () => document.documentElement.classList.add('bg-fallback');
+}
+
 function createForest() {
   const back = byId('pineLayerBack');
   const front = byId('pineLayerFront');
@@ -110,22 +123,22 @@ function createForest() {
   back.innerHTML = '';
   front.innerHTML = '';
   const isSmall = window.innerWidth < 640;
-  const backCount = isSmall ? 7 : 11;
-  const frontCount = isSmall ? 6 : 10;
+  const backCount = isSmall ? 4 : 7;
+  const frontCount = isSmall ? 4 : 7;
 
   const makeTree = (layer, depth, index, count) => {
     const tree = document.createElement('span');
     tree.className = 'pine';
     const isFront = depth === 'front';
     const baseLeft = (index / Math.max(count - 1, 1)) * 112 - 6;
-    const tall = isFront ? rand(86, 168) : rand(64, 128);
-    const w = isFront ? rand(82, 150) : rand(68, 126);
+    const tall = isFront ? rand(76, 142) : rand(56, 108);
+    const w = isFront ? rand(78, 138) : rand(62, 116);
     tree.style.setProperty('--left', `${baseLeft + rand(-3, 3)}%`);
-    tree.style.setProperty('--bottom', `${rand(-5, 5)}%`);
+    tree.style.setProperty('--bottom', `${rand(-5, 4)}%`);
     tree.style.setProperty('--h', `${tall}px`);
     tree.style.setProperty('--w', `${w}px`);
-    tree.style.setProperty('--o', `${isFront ? rand(0.28, 0.50) : rand(0.16, 0.30)}`);
-    tree.style.setProperty('--y', `${rand(-2, 10)}px`);
+    tree.style.setProperty('--o', `${isFront ? rand(0.18, 0.34) : rand(0.10, 0.22)}`);
+    tree.style.setProperty('--y', `${rand(-2, 8)}px`);
     layer.appendChild(tree);
   };
 
@@ -137,16 +150,17 @@ function createMist() {
   const layer = byId('mistRibbons');
   if (!layer) return;
   layer.innerHTML = '';
-  const count = window.innerWidth < 640 ? 3 : 4;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const count = reduceMotion ? 1 : (window.innerWidth < 640 ? 2 : 3);
   for (let i = 0; i < count; i += 1) {
     const ribbon = document.createElement('span');
     ribbon.className = 'ribbon';
-    ribbon.style.setProperty('--top', `${rand(50, 74)}%`);
+    ribbon.style.setProperty('--top', `${rand(48, 74)}%`);
     ribbon.style.setProperty('--h', `${rand(32, 62)}px`);
-    ribbon.style.setProperty('--blur', `${rand(6, 10)}px`);
+    ribbon.style.setProperty('--blur', `${rand(6, 9)}px`);
     ribbon.style.setProperty('--o', `${rand(0.18, 0.34)}`);
-    ribbon.style.setProperty('--d', `${rand(42, 64)}s`);
-    ribbon.style.setProperty('--delay', `${rand(-24, 0)}s`);
+    ribbon.style.setProperty('--d', `${rand(32, 48)}s`);
+    ribbon.style.setProperty('--delay', `${rand(-18, 0)}s`);
     layer.appendChild(ribbon);
   }
 }
@@ -155,17 +169,6 @@ function createRain() {
   const layer = byId('rainLayer');
   if (!layer) return;
   layer.innerHTML = '';
-  const count = window.innerWidth < 640 ? 8 : 14;
-  for (let i = 0; i < count; i += 1) {
-    const drop = document.createElement('span');
-    drop.className = 'drop';
-    drop.style.left = `${rand(-4, 110)}%`;
-    drop.style.setProperty('--h', `${rand(8, 18)}px`);
-    drop.style.setProperty('--d', `${rand(7.0, 11.0)}s`);
-    drop.style.setProperty('--delay', `${rand(-10, 0)}s`);
-    drop.style.setProperty('--o', `${rand(0.08, 0.18)}`);
-    layer.appendChild(drop);
-  }
 }
 
 function detectType(task) {
@@ -181,10 +184,82 @@ function detectType(task) {
   return matched ? matched[0] : 'creative';
 }
 
+function detectTaskHints(task) {
+  const text = task.toLowerCase();
+  return {
+    hasDeadline: /截止|ddl|deadline|明天|今晚|今天|马上|很急|来不及/.test(text),
+    hasMany: /很多|好多|一堆|全部|太多|复杂|乱/.test(text),
+    hasBlank: /不知道|没思路|空白|不会开始|从哪里/.test(text),
+    hasQualityFear: /不够好|怕|担心|完美|出错|不好看|做差/.test(text),
+  };
+}
+
 function energyLine(energy) {
   if (energy === 'soft') return '这版会很轻：只负责开始，不负责完美。';
   if (energy === 'steady') return '这版会保留推进感，但不给今天加太多重量。';
   return '这版可以稍微深入一点，同时保留清楚边界。';
+}
+
+function modeTone(mode) {
+  if (mode === 'lighter') return '这一次把门槛再降一点，只求轻轻碰到任务。';
+  if (mode === 'specific') return '这一次把动作写得更明确，让你不用临场再想。';
+  return '先用一个稳定的小步骤，把事情从混乱里带出来。';
+}
+
+function buildSteps({ task, profile, strategy, hints, seed, mode }) {
+  const actionOne = pick(profile.first, seed);
+  const actionTwo = pick(profile.focus, seed + 3);
+  const actionThree = pick(profile.close, seed + 7);
+
+  let stepOne = `${strategy.principle} 现在先做：${actionOne}。不用评价成果，只让「${task}」从脑子里落到眼前。`;
+  let stepTwo = `接着做一个十分钟的小推进：${actionTwo}。过程中只追踪一个问题：下一步还能不能再小一点？`;
+  let stepThree = `${actionThree}。结束时给下次留下一个清楚入口，而不是把自己重新丢回混乱里。`;
+
+  if (hints.hasDeadline) {
+    stepTwo = `优先做最能减少风险的一步：${actionTwo}。先保证有可交付的雏形，再考虑补充细节。`;
+  }
+  if (hints.hasMany || state.blocker === 'too-big') {
+    stepOne = `把「${task}」切掉九成，只保留一个小范围：${actionOne}。其余内容先放到“之后再看”。`;
+  }
+  if (hints.hasBlank || state.blocker === 'cant-start') {
+    stepOne = `先只做进入动作：${actionOne}。打开、拿出、放到眼前，就已经算开始。`;
+  }
+  if (hints.hasQualityFear || state.blocker === 'fear') {
+    stepOne = `先做一个低标准版本。它可以粗糙、短、不完整；存在，比漂亮更重要。`;
+    stepTwo = `只修一处最明显的地方，或者只补：${actionTwo}。不要同时追求漂亮和完整。`;
+  }
+  if (state.blocker === 'low-energy') {
+    stepOne = `选择最省力的入口：${actionOne}。能做 60 秒也算数。`;
+    stepTwo = `如果还有余力，只做一点：${actionTwo}；如果没有，就在这里收住。`;
+  }
+  if (state.blocker === 'messy') {
+    stepOne = `把关于「${task}」的念头写满两分钟。不分类、不排序，让它先落下来。`;
+    stepTwo = `从刚写下的内容里圈出最轻的一项，再做：${actionTwo}。`;
+  }
+  if (state.blocker === 'little-time') {
+    stepOne = `先问：如果只有十分钟，「${task}」里最值得保留的一小块是什么？`;
+    stepTwo = `只做这块里的：${actionTwo}。其余部分先不碰。`;
+  }
+  if (state.energy === 'soft') {
+    stepTwo = `只做 6 到 10 分钟：${actionTwo}。有一点痕迹就停，不需要进入最佳状态。`;
+    stepThree = '收尾只写一句：我已经开始过。然后留下下次继续的位置。';
+  }
+  if (state.energy === 'deep') {
+    stepTwo = `${actionTwo}，再加一个轻检查：看一个例子、对一个标准，或把结果读一遍。`;
+    stepThree = `${actionThree}，再补一句“下一轮可以优化什么”。这样进度会更稳。`;
+  }
+  if (mode === 'lighter') {
+    stepOne = `把「${task}」缩到几乎不会失败：${actionOne}，60 秒也算。`;
+    stepTwo = `还有力气，再做一点：${actionTwo}；没有力气，就到这里。`;
+    stepThree = '收尾只留一句：我已经碰到它了。';
+  }
+  if (mode === 'specific') {
+    stepOne = `设置 2 分钟，完成这个明确动作：${actionOne}。`;
+    stepTwo = `设置 10 分钟，只执行：${actionTwo}。期间不切换任务。`;
+    stepThree = `最后 1 分钟完成：${actionThree}，并写下下一步。`;
+  }
+
+  return { stepOne, stepTwo, stepThree };
 }
 
 function makePlan(mode = 'normal') {
@@ -194,59 +269,9 @@ function makePlan(mode = 'normal') {
   const taskType = selectedType === 'auto' ? detectType(task) : selectedType;
   const profile = typeProfiles[taskType];
   const strategy = blockerStrategies[state.blocker];
+  const hints = detectTaskHints(task);
   const seed = hashText(task + taskType + state.blocker + state.energy + mode);
-
-  const actionOne = pick(profile.first, seed);
-  const actionTwo = pick(profile.focus, seed + 3);
-  const actionThree = pick(profile.close, seed + 7);
-
-  let stepOne = `${actionOne}。先不要判断成果，只让「${task}」从脑子里落到眼前。`;
-  let stepTwo = `${actionTwo}。过程中只追踪一个问题：下一步还能不能再小一点？`;
-  let stepThree = `${actionThree}。结束时给下次留下一个清楚入口。`;
-
-  if (state.blocker === 'too-big') {
-    stepOne = `把「${task}」切掉九成，只保留一个小范围：${actionOne}。`;
-    stepTwo = `在这个小范围里做 ${actionTwo}，不要临时扩展边界。`;
-  }
-  if (state.blocker === 'cant-start') {
-    stepOne = `先只做进入动作：${actionOne}。打开、拿出、放到眼前，就已经算开始。`;
-    stepTwo = `给自己十分钟做 ${actionTwo}。十分钟后可以停，不需要证明什么。`;
-  }
-  if (state.blocker === 'fear') {
-    stepOne = `给「${task}」做一个低标准版本。它可以粗糙、短、不完整。`;
-    stepTwo = `只修一处最明显的地方，或者只补 ${actionTwo}。不要同时追求漂亮和完整。`;
-  }
-  if (state.blocker === 'low-energy') {
-    stepOne = `选择最省力的入口：${actionOne}。能做 60 秒也算数。`;
-    stepTwo = `如果还有余力，只做 ${actionTwo}；如果没有，就在这里收住。`;
-  }
-  if (state.blocker === 'messy') {
-    stepOne = `把关于「${task}」的念头写满两分钟。不分类、不排序，让它先落下来。`;
-    stepTwo = `从刚写下的内容里圈出最轻的一项，再做 ${actionTwo}。`;
-  }
-  if (state.blocker === 'little-time') {
-    stepOne = `先问：如果只有十分钟，「${task}」里最值得保留的一小块是什么？`;
-    stepTwo = `只做这块里的 ${actionTwo}。其余部分先不碰。`;
-  }
-
-  if (state.energy === 'soft') {
-    stepTwo = `只做 6 到 10 分钟。${actionTwo}，有一点痕迹就停。`;
-    stepThree = '收尾只写一句：我已经开始过。然后留下下次继续的位置。';
-  }
-  if (state.energy === 'deep') {
-    stepTwo = `${actionTwo}，再加一个轻检查：看一个例子、对一个标准，或把结果读一遍。`;
-  }
-
-  if (mode === 'lighter') {
-    stepOne = `把「${task}」缩到几乎不会失败：${actionOne}，60 秒也算。`;
-    stepTwo = `还有力气，再做一点 ${actionTwo}；没有力气，就到这里。`;
-    stepThree = '收尾只留一句：我已经碰到它了。';
-  }
-  if (mode === 'specific') {
-    stepOne = `设置 2 分钟，完成这个明确动作：${actionOne}。`;
-    stepTwo = `设置 10 分钟，只执行：${actionTwo}。期间不切换任务。`;
-    stepThree = `最后 1 分钟完成：${actionThree}，并写下下一步。`;
-  }
+  const steps = buildSteps({ task, profile, strategy, hints, seed, mode });
 
   return {
     task,
@@ -254,13 +279,13 @@ function makePlan(mode = 'normal') {
     blocker: state.blocker,
     energy: state.energy,
     mode,
-    intro: `${strategy.intro} ${energyLine(state.energy)}`,
+    intro: `${strategy.intro} ${profile.cue} ${energyLine(state.energy)} ${modeTone(mode)}`,
     title1: strategy.titles[0],
-    text1: stepOne,
+    text1: steps.stepOne,
     title2: strategy.titles[1],
-    text2: stepTwo,
+    text2: steps.stepTwo,
     title3: strategy.titles[2],
-    text3: stepThree,
+    text3: steps.stepThree,
     time: new Date().toISOString(),
   };
 }
@@ -329,10 +354,11 @@ function regenerateAtmosphere() {
 }
 
 function init() {
+  preloadBackground();
   regenerateAtmosphere();
   window.addEventListener('resize', () => {
     clearTimeout(window.__tinyStepsAtmosphereTimer);
-    window.__tinyStepsAtmosphereTimer = setTimeout(regenerateAtmosphere, 300);
+    window.__tinyStepsAtmosphereTimer = setTimeout(regenerateAtmosphere, 350);
   });
   setChoice('blockerChoices', 'blocker');
   setChoice('energyChoices', 'energy');
