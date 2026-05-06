@@ -1,73 +1,96 @@
+:root {
+  --cosmic-intensity: 0;
+}
+
+.atmosphere {
+  filter: saturate(calc(1.04 + var(--cosmic-intensity) * .18)) brightness(calc(1 + var(--cosmic-intensity) * .035));
+}
+
+.sky-wash {
+  opacity: calc(.95 + var(--cosmic-intensity) * .18) !important;
+  animation-duration: calc(18s - var(--cosmic-intensity) * 8s) !important;
+}
+
+.distant-light {
+  opacity: calc(.54 + var(--cosmic-intensity) * .26) !important;
+  filter: blur(15px) saturate(calc(1.12 + var(--cosmic-intensity) * .16)) !important;
+}
+
 .atmosphere::before {
   background:
-    radial-gradient(ellipse at 22% 50%, rgba(255, 255, 255, 0.36), transparent 34%),
-    radial-gradient(ellipse at 70% 40%, rgba(164, 210, 240, 0.48), transparent 36%),
-    radial-gradient(ellipse at 38% 26%, rgba(192, 162, 235, 0.45), transparent 35%),
-    radial-gradient(ellipse at 64% 70%, rgba(130, 198, 232, 0.36), transparent 38%),
-    radial-gradient(ellipse at 48% 18%, rgba(255, 224, 150, 0.25), transparent 33%) !important;
-  opacity: 0.95 !important;
-  animation-duration: 7.2s !important;
+    radial-gradient(ellipse at 22% 50%, rgba(255, 255, 255, 0.38), transparent 34%),
+    radial-gradient(ellipse at 70% 40%, rgba(164, 210, 240, 0.50), transparent 36%),
+    radial-gradient(ellipse at 38% 26%, rgba(192, 162, 235, 0.47), transparent 35%),
+    radial-gradient(ellipse at 64% 70%, rgba(130, 198, 232, 0.38), transparent 38%),
+    radial-gradient(ellipse at 48% 18%, rgba(255, 224, 142, 0.34), transparent 35%),
+    radial-gradient(ellipse at 58% 38%, rgba(255, 238, 174, 0.20), transparent 30%) !important;
+  opacity: calc(.96 + var(--cosmic-intensity) * .08) !important;
+  animation-duration: calc(6.2s - var(--cosmic-intensity) * 2.2s) !important;
 }
 
 .atmosphere::after {
   background:
-    radial-gradient(circle at 20% 10%, rgba(196, 168, 236, 0.43), transparent 30%),
-    radial-gradient(circle at 82% 16%, rgba(139, 202, 236, 0.43), transparent 35%),
-    radial-gradient(circle at 54% 62%, rgba(168, 213, 224, 0.28), transparent 39%),
-    radial-gradient(circle at 38% 28%, rgba(255, 218, 132, 0.23), transparent 30%) !important;
-  animation-duration: 5.6s !important;
+    radial-gradient(circle at 20% 10%, rgba(196, 168, 236, 0.44), transparent 30%),
+    radial-gradient(circle at 82% 16%, rgba(139, 202, 236, 0.45), transparent 35%),
+    radial-gradient(circle at 54% 62%, rgba(168, 213, 224, 0.30), transparent 39%),
+    radial-gradient(circle at 38% 28%, rgba(255, 218, 128, 0.32), transparent 31%),
+    radial-gradient(circle at 62% 18%, rgba(255, 240, 178, 0.20), transparent 27%) !important;
+  opacity: calc(.92 + var(--cosmic-intensity) * .12) !important;
+  animation-duration: calc(4.8s - var(--cosmic-intensity) * 1.6s) !important;
 }
 
 .fog-bank {
-  opacity: 0.66 !important;
+  opacity: calc(.72 + var(--cosmic-intensity) * .18) !important;
   background:
-    radial-gradient(ellipse at 16% 58%, rgba(255,255,255,.54), transparent 56%),
-    radial-gradient(ellipse at 48% 50%, rgba(224,232,252,.52), transparent 58%),
-    radial-gradient(ellipse at 76% 55%, rgba(198,226,244,.46), transparent 60%),
-    radial-gradient(ellipse at 36% 42%, rgba(255, 226, 154, .24), transparent 52%) !important;
-  animation-duration: 7.6s !important;
+    radial-gradient(ellipse at 16% 58%, rgba(255,255,255,.56), transparent 56%),
+    radial-gradient(ellipse at 48% 50%, rgba(224,232,252,.54), transparent 58%),
+    radial-gradient(ellipse at 76% 55%, rgba(198,226,244,.48), transparent 60%),
+    radial-gradient(ellipse at 36% 42%, rgba(255, 226, 148, .34), transparent 54%),
+    radial-gradient(ellipse at 58% 34%, rgba(255, 242, 184, .18), transparent 48%) !important;
+  animation-duration: calc(6.4s - var(--cosmic-intensity) * 2s) !important;
 }
 
 .ribbon {
   background:
-    radial-gradient(ellipse at 18% 50%, rgba(255,255,255,.64), transparent 44%),
-    radial-gradient(ellipse at 56% 50%, rgba(225,228,255,.56), transparent 50%),
-    radial-gradient(ellipse at 78% 50%, rgba(187,224,246,.44), transparent 50%),
-    radial-gradient(ellipse at 38% 50%, rgba(255, 226, 154, .26), transparent 48%),
-    linear-gradient(90deg, transparent, rgba(255,255,255,.46), rgba(207,219,251,.40), rgba(255,226,154,.20), transparent) !important;
-  opacity: var(--o, .68) !important;
-  animation-duration: 22s !important;
+    radial-gradient(ellipse at 18% 50%, rgba(255,255,255,.66), transparent 44%),
+    radial-gradient(ellipse at 56% 50%, rgba(225,228,255,.58), transparent 50%),
+    radial-gradient(ellipse at 78% 50%, rgba(187,224,246,.46), transparent 50%),
+    radial-gradient(ellipse at 38% 50%, rgba(255, 226, 148, .36), transparent 50%),
+    radial-gradient(ellipse at 66% 50%, rgba(255, 242, 184, .18), transparent 46%),
+    linear-gradient(90deg, transparent, rgba(255,255,255,.50), rgba(207,219,251,.42), rgba(255,226,148,.28), transparent) !important;
+  opacity: var(--o, calc(.74 + var(--cosmic-intensity) * .18)) !important;
+  animation-duration: calc(19s - var(--cosmic-intensity) * 7s) !important;
 }
 
 body.cosmic-has-words .atmosphere::before,
 body.cosmic-writing .atmosphere::before {
   opacity: 1 !important;
-  animation-duration: 3.8s !important;
+  animation-duration: calc(3.6s - var(--cosmic-intensity) * 1.2s) !important;
 }
 
 body.cosmic-has-words .atmosphere::after,
 body.cosmic-writing .atmosphere::after {
   opacity: 1 !important;
-  animation-duration: 3.6s !important;
+  animation-duration: calc(3.3s - var(--cosmic-intensity) * 1s) !important;
 }
 
 body.cosmic-has-words .fog-bank,
 body.cosmic-writing .fog-bank {
-  opacity: 0.82 !important;
-  animation-duration: 6.2s !important;
+  opacity: calc(.84 + var(--cosmic-intensity) * .12) !important;
+  animation-duration: calc(5.4s - var(--cosmic-intensity) * 1.6s) !important;
 }
 
 body.cosmic-has-words .ribbon,
 body.cosmic-writing .ribbon {
-  opacity: var(--o, .82) !important;
-  filter: blur(var(--blur, 7px)) saturate(1.15) !important;
-  animation-duration: 18s !important;
+  opacity: var(--o, calc(.86 + var(--cosmic-intensity) * .10)) !important;
+  filter: blur(var(--blur, 7px)) saturate(calc(1.18 + var(--cosmic-intensity) * .18)) !important;
+  animation-duration: calc(15s - var(--cosmic-intensity) * 5s) !important;
 }
 
 body.cosmic-has-words .distant-light,
 body.cosmic-writing .distant-light {
-  opacity: .66 !important;
-  filter: blur(16px) saturate(1.15) !important;
+  opacity: calc(.70 + var(--cosmic-intensity) * .18) !important;
+  filter: blur(15px) saturate(calc(1.18 + var(--cosmic-intensity) * .16)) !important;
 }
 
 .whisper-wrap {
