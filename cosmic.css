@@ -1,0 +1,319 @@
+.atmosphere::before {
+  background:
+    radial-gradient(ellipse at 22% 50%, rgba(255, 255, 255, 0.34), transparent 34%),
+    radial-gradient(ellipse at 72% 42%, rgba(177, 214, 238, 0.38), transparent 36%),
+    radial-gradient(ellipse at 38% 26%, rgba(183, 158, 226, 0.34), transparent 35%),
+    radial-gradient(ellipse at 66% 72%, rgba(128, 196, 226, 0.30), transparent 38%) !important;
+  opacity: 0.86 !important;
+}
+
+.atmosphere::after {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(189, 166, 230, 0.34), transparent 29%),
+    radial-gradient(circle at 82% 16%, rgba(144, 199, 232, 0.34), transparent 34%),
+    radial-gradient(circle at 50% 66%, rgba(162, 208, 218, 0.24), transparent 38%) !important;
+}
+
+.fog-bank {
+  opacity: 0.56 !important;
+  background:
+    radial-gradient(ellipse at 16% 58%, rgba(255,255,255,.48), transparent 56%),
+    radial-gradient(ellipse at 48% 50%, rgba(222,232,250,.46), transparent 58%),
+    radial-gradient(ellipse at 76% 55%, rgba(199,224,240,.40), transparent 60%) !important;
+}
+
+.ribbon {
+  background:
+    radial-gradient(ellipse at 18% 50%, rgba(255,255,255,.58), transparent 44%),
+    radial-gradient(ellipse at 56% 50%, rgba(221,226,252,.48), transparent 50%),
+    radial-gradient(ellipse at 78% 50%, rgba(187,222,242,.34), transparent 50%),
+    linear-gradient(90deg, transparent, rgba(255,255,255,.38), rgba(205,218,248,.32), transparent) !important;
+  opacity: var(--o, .56) !important;
+}
+
+body.cosmic-writing .atmosphere::before,
+body.cosmic-writing .atmosphere::after {
+  animation-duration: 4.8s !important;
+}
+
+body.cosmic-writing .fog-bank {
+  opacity: 0.68 !important;
+}
+
+.whisper-wrap {
+  margin-top: 24px;
+  padding: 26px;
+}
+
+.whisper-inner {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.whisper-copy h2 {
+  margin: 8px 0 8px;
+  font-family: "Noto Serif SC", serif;
+  font-size: 24px;
+  letter-spacing: -0.025em;
+}
+
+.whisper-copy p {
+  margin: 0;
+  max-width: 620px;
+  color: rgba(43, 60, 74, .72);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.secondary-btn,
+.cosmic-btn,
+.text-btn {
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+}
+
+.secondary-btn {
+  border: 0;
+  padding: 14px 22px;
+  color: white;
+  background: linear-gradient(135deg, #6a8bab, #8879bf);
+  box-shadow: 0 14px 32px rgba(55, 75, 116, .20);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.secondary-btn:hover,
+.cosmic-btn:hover,
+.text-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(28,54,72,.09);
+}
+
+.letters-wrap {
+  margin-top: 16px;
+  padding: 24px;
+}
+
+.letters-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.letters-head h2 {
+  margin: 8px 0 0;
+  font-family: "Noto Serif SC", serif;
+  font-size: 22px;
+}
+
+.text-btn {
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.035);
+  color: var(--blue-deep);
+  padding: 10px 15px;
+}
+
+.letters-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.letter-item {
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 22px;
+  padding: 16px;
+  background: rgba(255,255,255,.035);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+.letter-date {
+  margin: 0 0 8px;
+  color: rgba(62, 94, 118, .76);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.letter-text {
+  margin: 0;
+  color: rgba(36, 54, 68, .82);
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.whisper-dialog {
+  width: min(640px, calc(100% - 28px));
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 30px;
+  padding: 0;
+  color: var(--ink);
+  background: rgba(237, 244, 252, .86);
+  box-shadow: 0 28px 90px rgba(19, 38, 56, .26);
+  overflow: hidden;
+}
+
+.whisper-dialog::backdrop {
+  background: rgba(22, 35, 58, .28);
+  backdrop-filter: blur(3px);
+}
+
+.whisper-panel {
+  position: relative;
+  padding: 28px;
+  background:
+    radial-gradient(circle at 16% 8%, rgba(190, 166, 230, .30), transparent 34%),
+    radial-gradient(circle at 82% 18%, rgba(151, 207, 238, .32), transparent 36%),
+    rgba(255,255,255,.18);
+}
+
+.whisper-panel h2 {
+  margin: 8px 0 14px;
+  font-family: "Noto Serif SC", serif;
+  font-size: 25px;
+}
+
+.close-btn {
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.28);
+  background: rgba(255,255,255,.16);
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+  color: rgba(28, 45, 64, .78);
+}
+
+#whisperInput {
+  min-height: 190px;
+  background: rgba(255,255,255,.18) !important;
+  border-color: rgba(255,255,255,.30) !important;
+}
+
+.whisper-hint {
+  margin: 10px 0 0;
+  color: rgba(54, 72, 88, .68);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.cosmic-btn {
+  border: 1px solid rgba(255,255,255,.26);
+  padding: 12px 18px;
+  color: #314866;
+  background: rgba(255,255,255,.20);
+}
+
+.cosmic-btn.primary {
+  border: 0;
+  color: white;
+  background: linear-gradient(135deg, #566f9b, #8977bd);
+  font-weight: 700;
+}
+
+.cosmic-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(189, 166, 230, .30), transparent 34%),
+    radial-gradient(circle at 54% 50%, rgba(149, 207, 238, .24), transparent 42%),
+    rgba(12, 22, 42, .26);
+  transition: opacity .35s ease, visibility .35s ease;
+}
+
+.cosmic-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cosmic-message {
+  width: min(430px, calc(100% - 36px));
+  text-align: center;
+  color: white;
+  text-shadow: 0 1px 18px rgba(10, 20, 40, .32);
+  animation: cosmicRise 1.8s ease both;
+}
+
+.cosmic-star {
+  display: block;
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 18px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 36% 32%, rgba(255,255,255,.98), rgba(213,220,255,.70) 34%, rgba(160,193,238,.36) 62%, transparent 70%);
+  box-shadow: 0 0 22px rgba(221, 226, 255, .72), 0 0 66px rgba(162, 207, 238, .48);
+  animation: starRelease 1.8s ease both;
+}
+
+.cosmic-message h2 {
+  margin: 0 0 10px;
+  font-family: "Noto Serif SC", serif;
+  font-size: 28px;
+}
+
+.cosmic-message p {
+  margin: 0;
+  line-height: 1.85;
+  color: rgba(255,255,255,.88);
+}
+
+@keyframes cosmicRise {
+  0% { transform: translateY(22px) scale(.98); opacity: 0; }
+  35% { opacity: 1; }
+  100% { transform: translateY(-28px) scale(1.01); opacity: 0; }
+}
+
+@keyframes starRelease {
+  0% { transform: translateY(40px) scale(.72); opacity: 0; }
+  35% { opacity: 1; }
+  100% { transform: translateY(-70px) scale(1.18); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-message,
+  .cosmic-star {
+    animation-duration: .01ms !important;
+  }
+}
+
+@media (max-width: 920px) {
+  .letters-list { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .whisper-wrap,
+  .letters-wrap { padding: 20px; border-radius: 24px; }
+  .whisper-inner,
+  .letters-head { display: block; }
+  .secondary-btn { margin-top: 16px; width: 100%; }
+  .letters-list { grid-template-columns: 1fr; }
+  .whisper-panel { padding: 24px 18px 20px; }
+  .dialog-actions { justify-content: stretch; }
+  .cosmic-btn { flex: 1; }
+}
