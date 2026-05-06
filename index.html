@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="background.css" />
   <link rel="stylesheet" href="cosmic.css" />
+  <link rel="stylesheet" href="mood.css" />
 </head>
 <body>
   <div class="atmosphere" aria-hidden="true">
@@ -158,6 +159,41 @@
       </div>
       <div class="letters-list" id="lettersList"></div>
     </section>
+
+    <section class="history-wrap mood-wrap" aria-label="状态支持卡片">
+      <div class="section-title">
+        <div>
+          <p class="label">Step 05</p>
+          <h2>按状态选择下一步</h2>
+        </div>
+        <p class="section-note">情绪不是阻碍，是任务入口的提示。</p>
+      </div>
+      <div class="mood-tools">
+        <div class="mood-filters" id="moodFilters"></div>
+        <input class="mood-search" id="moodSearch" type="search" placeholder="搜索：焦虑、写作、开始…" />
+      </div>
+      <div class="mood-grid" id="moodGrid"></div>
+      <button class="more-cards-btn" id="moreCardsBtn" type="button">再看一些</button>
+    </section>
+
+    <section class="history-wrap calendar-wrap" aria-label="心情日历">
+      <div class="calendar-head">
+        <div>
+          <p class="label">Step 06</p>
+          <h2 class="month-title" id="monthTitle">心情日历</h2>
+        </div>
+        <div class="calendar-actions">
+          <button class="month-btn" id="prevMonthBtn" type="button">上个月</button>
+          <button class="month-btn" id="nextMonthBtn" type="button">下个月</button>
+        </div>
+      </div>
+      <div class="week-row" aria-hidden="true">
+        <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+      <p class="calendar-note">点一天，再选状态。颜色会留下当月的情绪浓度，方便你判断什么时候适合轻做，什么时候适合推进。</p>
+      <div class="mood-picker" id="moodPicker"></div>
+    </section>
   </main>
 
   <template id="historyTemplate">
@@ -193,5 +229,6 @@
 
   <script src="script.js"></script>
   <script src="cosmic.js"></script>
+  <script src="mood.js"></script>
 </body>
 </html>
