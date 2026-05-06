@@ -137,24 +137,24 @@
       <div class="history-list" id="historyList"></div>
     </section>
 
-    <section class="history-wrap whisper-wrap" aria-label="给小小的自己的话">
+    <section class="history-wrap whisper-wrap" aria-label="心事暂存处">
       <div class="whisper-inner">
         <div class="whisper-copy">
           <p class="label">Step 04</p>
-          <h2>写一点给小小的自己</h2>
-          <p>碎碎念、感受、没说出口的话，都可以先放在这里。写完后，你可以让它进入宇宙，也可以记录下来，像一封以后再看的小信。</p>
+          <h2>把心里的微光放下来</h2>
+          <p>有些话不必立刻变成答案。你可以把此刻的感受、没整理好的念头、想安放的情绪写在这里：愿意留下，就让它成为一封温柔的备忘；想放开，就把它交给宇宙。</p>
         </div>
-        <button class="secondary-btn" id="openWhisperBtn" type="button">写一点心里话</button>
+        <button class="secondary-btn" id="openWhisperBtn" type="button">写一段心里的话</button>
       </div>
     </section>
 
     <section class="history-wrap letters-wrap" id="lettersSection" aria-label="写给自己的小信" hidden>
       <div class="letters-head">
         <div>
-          <p class="label">Saved Letters</p>
-          <h2>留给自己的小信</h2>
+          <p class="label">Saved Notes</p>
+          <h2>被好好保存的片刻</h2>
         </div>
-        <button class="text-btn" id="clearLettersBtn" type="button">清空小信</button>
+        <button class="text-btn" id="clearLettersBtn" type="button">清空记录</button>
       </div>
       <div class="letters-list" id="lettersList"></div>
     </section>
@@ -171,22 +171,23 @@
   <dialog class="whisper-dialog" id="whisperDialog">
     <div class="whisper-panel">
       <button type="button" class="close-btn" id="closeWhisperBtn" aria-label="关闭">×</button>
-      <p class="label">A Small Letter</p>
-      <h2>现在的你，想对小小的自己说什么？</h2>
-      <textarea id="whisperInput" maxlength="600" placeholder="可以写：我今天有点累。也可以写：虽然害怕，但我已经在努力了。"></textarea>
-      <p class="whisper-hint">这些内容只保存在当前浏览器本地，不会上传到服务器。选择“进入宇宙”后，这段话会消失。</p>
+      <p class="label">Quiet Orbit</p>
+      <h2>把这一刻，轻轻放进星云里。</h2>
+      <textarea id="whisperInput" maxlength="600" placeholder="写下此刻的重量、温柔、犹豫，或者一句想被记住的话。它不需要完整，也不需要漂亮。"></textarea>
+      <p class="whisper-hint">这些文字只停留在当前浏览器里。选择“交给宇宙”，它会化成星尘离开；选择“记录下来”，它会成为一枚安静的时间印记。</p>
       <div class="dialog-actions">
-        <button type="button" class="cosmic-btn" id="releaseBtn">进入宇宙</button>
+        <button type="button" class="cosmic-btn" id="releaseBtn">交给宇宙</button>
         <button type="button" class="cosmic-btn primary" id="saveLetterBtn">记录下来</button>
       </div>
     </div>
   </dialog>
 
   <div class="cosmic-overlay" id="cosmicOverlay" aria-hidden="true">
+    <div class="cosmic-particles" id="cosmicParticles"></div>
     <div class="cosmic-message">
       <span class="cosmic-star"></span>
-      <h2>它正在进入宇宙。</h2>
-      <p>不需要再紧紧抓住了。那些没说出口的、暂时做不到的、已经很努力的部分，都先交给星尘。</p>
+      <h2>它已经抵达星云。</h2>
+      <p>你不需要一直握紧它。愿那些暂时说不清的、做不到的、已经很努力的部分，被夜色温柔接住。</p>
     </div>
   </div>
 
