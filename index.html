@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="background.css" />
+  <link rel="stylesheet" href="cosmic.css" />
 </head>
 <body>
   <div class="atmosphere" aria-hidden="true">
@@ -135,6 +136,28 @@
       </div>
       <div class="history-list" id="historyList"></div>
     </section>
+
+    <section class="history-wrap whisper-wrap" aria-label="给小小的自己的话">
+      <div class="whisper-inner">
+        <div class="whisper-copy">
+          <p class="label">Step 04</p>
+          <h2>写一点给小小的自己</h2>
+          <p>碎碎念、感受、没说出口的话，都可以先放在这里。写完后，你可以让它进入宇宙，也可以记录下来，像一封以后再看的小信。</p>
+        </div>
+        <button class="secondary-btn" id="openWhisperBtn" type="button">写一点心里话</button>
+      </div>
+    </section>
+
+    <section class="history-wrap letters-wrap" id="lettersSection" aria-label="写给自己的小信" hidden>
+      <div class="letters-head">
+        <div>
+          <p class="label">Saved Letters</p>
+          <h2>留给自己的小信</h2>
+        </div>
+        <button class="text-btn" id="clearLettersBtn" type="button">清空小信</button>
+      </div>
+      <div class="letters-list" id="lettersList"></div>
+    </section>
   </main>
 
   <template id="historyTemplate">
@@ -145,6 +168,29 @@
     </article>
   </template>
 
+  <dialog class="whisper-dialog" id="whisperDialog">
+    <div class="whisper-panel">
+      <button type="button" class="close-btn" id="closeWhisperBtn" aria-label="关闭">×</button>
+      <p class="label">A Small Letter</p>
+      <h2>现在的你，想对小小的自己说什么？</h2>
+      <textarea id="whisperInput" maxlength="600" placeholder="可以写：我今天有点累。也可以写：虽然害怕，但我已经在努力了。"></textarea>
+      <p class="whisper-hint">这些内容只保存在当前浏览器本地，不会上传到服务器。选择“进入宇宙”后，这段话会消失。</p>
+      <div class="dialog-actions">
+        <button type="button" class="cosmic-btn" id="releaseBtn">进入宇宙</button>
+        <button type="button" class="cosmic-btn primary" id="saveLetterBtn">记录下来</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="cosmic-overlay" id="cosmicOverlay" aria-hidden="true">
+    <div class="cosmic-message">
+      <span class="cosmic-star"></span>
+      <h2>它正在进入宇宙。</h2>
+      <p>不需要再紧紧抓住了。那些没说出口的、暂时做不到的、已经很努力的部分，都先交给星尘。</p>
+    </div>
+  </div>
+
   <script src="script.js"></script>
+  <script src="cosmic.js"></script>
 </body>
 </html>
