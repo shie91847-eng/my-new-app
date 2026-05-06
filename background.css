@@ -5,9 +5,9 @@
 
 .atmosphere {
   background:
-    linear-gradient(180deg, rgba(235, 246, 252, 0.46) 0%, rgba(222, 234, 248, 0.30) 34%, rgba(199, 222, 226, 0.23) 62%, rgba(146, 184, 166, 0.16) 100%),
-    radial-gradient(circle at 18% 12%, rgba(184, 174, 219, 0.18), transparent 30%),
-    radial-gradient(circle at 78% 18%, rgba(158, 193, 218, 0.22), transparent 34%),
+    linear-gradient(180deg, rgba(235, 246, 252, 0.42) 0%, rgba(218, 232, 248, 0.28) 34%, rgba(190, 218, 224, 0.22) 62%, rgba(128, 168, 148, 0.16) 100%),
+    radial-gradient(circle at 18% 12%, rgba(174, 160, 213, 0.22), transparent 30%),
+    radial-gradient(circle at 78% 18%, rgba(141, 186, 218, 0.26), transparent 34%),
     url("./IMG_20260506_123026.jpg") !important;
   background-size: cover !important;
   background-position: center center !important;
@@ -22,12 +22,12 @@
   inset: -14%;
   background:
     radial-gradient(ellipse at 24% 52%, rgba(255, 255, 255, 0.30), transparent 34%),
-    radial-gradient(ellipse at 76% 44%, rgba(205, 224, 236, 0.24), transparent 34%),
-    radial-gradient(ellipse at 40% 28%, rgba(185, 174, 218, 0.20), transparent 34%),
-    radial-gradient(ellipse at 68% 72%, rgba(145, 197, 221, 0.20), transparent 36%);
-  filter: blur(14px);
-  opacity: 0.74;
-  animation: ambientFlow 10s ease-in-out infinite alternate;
+    radial-gradient(ellipse at 76% 44%, rgba(190, 219, 236, 0.28), transparent 34%),
+    radial-gradient(ellipse at 40% 28%, rgba(178, 160, 218, 0.24), transparent 34%),
+    radial-gradient(ellipse at 68% 72%, rgba(126, 194, 220, 0.24), transparent 36%);
+  filter: blur(13px);
+  opacity: 0.76;
+  animation: ambientFlow 9s ease-in-out infinite alternate;
   will-change: transform, opacity;
   transform: translateZ(0);
 }
@@ -37,63 +37,63 @@
   position: absolute;
   inset: -4%;
   background:
-    radial-gradient(circle at 22% 10%, rgba(190, 180, 222, 0.20), transparent 28%),
-    radial-gradient(circle at 82% 16%, rgba(165, 200, 224, 0.20), transparent 32%),
-    radial-gradient(circle at 48% 68%, rgba(179, 215, 198, 0.16), transparent 36%);
-  animation: colorBreath 7s ease-in-out infinite alternate;
+    radial-gradient(circle at 22% 10%, rgba(182, 168, 220, 0.24), transparent 28%),
+    radial-gradient(circle at 82% 16%, rgba(145, 195, 224, 0.24), transparent 32%),
+    radial-gradient(circle at 48% 68%, rgba(158, 209, 190, 0.18), transparent 36%);
+  animation: colorBreath 6.5s ease-in-out infinite alternate;
   will-change: opacity, transform;
   transform: translateZ(0);
 }
 
 @keyframes ambientFlow {
-  0% { transform: translate3d(-4.0%, -1.4%, 0) scale(1.04); opacity: 0.44; }
-  45% { transform: translate3d(2.4%, 1.0%, 0) scale(1.075); opacity: 0.84; }
-  100% { transform: translate3d(5.0%, 1.6%, 0) scale(1.045); opacity: 0.58; }
+  0% { transform: translate3d(-4.6%, -1.5%, 0) scale(1.04); opacity: 0.42; }
+  45% { transform: translate3d(2.8%, 1.0%, 0) scale(1.08); opacity: 0.88; }
+  100% { transform: translate3d(5.6%, 1.7%, 0) scale(1.045); opacity: 0.58; }
 }
 
 @keyframes colorBreath {
-  0% { opacity: 0.42; transform: translate3d(-1%, 0, 0); }
-  50% { opacity: 0.92; transform: translate3d(1%, .5%, 0); }
-  100% { opacity: 0.58; transform: translate3d(0, -.5%, 0); }
+  0% { opacity: 0.40; transform: translate3d(-1.3%, 0, 0); }
+  50% { opacity: 0.96; transform: translate3d(1.3%, .6%, 0); }
+  100% { opacity: 0.58; transform: translate3d(0, -.6%, 0); }
 }
 
 .fog-bank {
-  left: -36% !important;
-  right: -36% !important;
+  left: -38% !important;
+  right: -38% !important;
   bottom: 18vh !important;
   height: 38vh !important;
   background:
-    radial-gradient(ellipse at 18% 60%, rgba(255,255,255,.38), transparent 56%),
-    radial-gradient(ellipse at 48% 50%, rgba(226,238,242,.36), transparent 58%),
-    radial-gradient(ellipse at 76% 56%, rgba(204,222,226,.28), transparent 60%) !important;
+    radial-gradient(ellipse at 18% 60%, rgba(255,255,255,.40), transparent 56%),
+    radial-gradient(ellipse at 48% 50%, rgba(220,236,242,.38), transparent 58%),
+    radial-gradient(ellipse at 76% 56%, rgba(194,222,226,.30), transparent 60%) !important;
   filter: blur(8px) !important;
-  opacity: 0.46 !important;
-  animation: fogBreathWide 12s ease-in-out infinite alternate !important;
+  opacity: 0.48 !important;
+  animation: fogBreathWide 11s ease-in-out infinite alternate !important;
   will-change: transform, opacity;
   transform: translateZ(0);
 }
 
 @keyframes fogBreathWide {
-  0% { transform: translate3d(-5.2%, 0, 0) scale(1.02); opacity: 0.24; }
-  50% { transform: translate3d(2.4%, -1.5%, 0) scale(1.10); opacity: 0.60; }
-  100% { transform: translate3d(6.0%, 1.2%, 0) scale(1.04); opacity: 0.34; }
+  0% { transform: translate3d(-5.8%, 0, 0) scale(1.02); opacity: 0.24; }
+  50% { transform: translate3d(2.8%, -1.5%, 0) scale(1.11); opacity: 0.62; }
+  100% { transform: translate3d(6.6%, 1.2%, 0) scale(1.04); opacity: 0.34; }
 }
 
 .ribbon {
   background:
-    radial-gradient(ellipse at 18% 50%, rgba(255,255,255,.48), transparent 44%),
-    radial-gradient(ellipse at 58% 50%, rgba(226,236,242,.38), transparent 50%),
-    linear-gradient(90deg, transparent, rgba(255,255,255,.30), rgba(208,224,232,.22), transparent) !important;
-  opacity: var(--o, .46) !important;
-  animation: ribbonFlow var(--d, 28s) ease-in-out infinite alternate !important;
+    radial-gradient(ellipse at 18% 50%, rgba(255,255,255,.50), transparent 44%),
+    radial-gradient(ellipse at 58% 50%, rgba(220,236,242,.40), transparent 50%),
+    linear-gradient(90deg, transparent, rgba(255,255,255,.32), rgba(200,224,232,.24), transparent) !important;
+  opacity: var(--o, .48) !important;
+  animation: ribbonFlow var(--d, 26s) ease-in-out infinite alternate !important;
   will-change: transform, opacity;
   transform: translateZ(0);
 }
 
 @keyframes ribbonFlow {
-  0% { transform: translate3d(-10vw, -4px, 0) scaleX(1); opacity: .28; }
-  50% { transform: translate3d(2vw, 3px, 0) scaleX(1.07); opacity: .58; }
-  100% { transform: translate3d(10vw, -2px, 0) scaleX(1.03); opacity: .36; }
+  0% { transform: translate3d(-11vw, -4px, 0) scaleX(1); opacity: .30; }
+  50% { transform: translate3d(2vw, 3px, 0) scaleX(1.08); opacity: .62; }
+  100% { transform: translate3d(11vw, -2px, 0) scaleX(1.03); opacity: .38; }
 }
 
 .panel,
@@ -133,6 +133,35 @@ select,
   will-change: opacity;
 }
 
+.choice.is-active,
+.segment.is-active {
+  background-color: rgba(255,255,255,0.028) !important;
+  border-color: rgba(255,255,255,0.54) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.32),
+    0 0 0 1px rgba(168, 199, 219, .18),
+    0 14px 30px rgba(24, 56, 78, .10) !important;
+  color: #10253a !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.choice.is-active::after,
+.segment.is-active::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 32%, rgba(255,255,255,.96) 0 1px, rgba(45,75,95,.22) 1.3px, transparent 3px),
+    radial-gradient(circle at 62% 22%, rgba(255,255,255,.82) 0 1.4px, rgba(45,75,95,.18) 1.7px, transparent 3.6px),
+    radial-gradient(circle at 82% 68%, rgba(255,255,255,.86) 0 1.2px, rgba(45,75,95,.18) 1.5px, transparent 3.2px);
+  background-size: 86px 72px, 112px 90px, 96px 80px;
+  mix-blend-mode: screen;
+  opacity: .95;
+}
+
 @keyframes dropletDrift {
   0% { opacity: .78; }
   50% { opacity: .98; }
@@ -152,20 +181,20 @@ select,
 
   .atmosphere::before {
     filter: blur(10px);
-    animation-duration: 12s;
+    animation-duration: 11s;
   }
 
   .atmosphere::after {
-    animation-duration: 9s;
+    animation-duration: 8s;
   }
 
   .fog-bank {
     filter: blur(7px) !important;
-    animation-duration: 14s !important;
+    animation-duration: 13s !important;
   }
 
   .ribbon {
-    animation-duration: 34s !important;
+    animation-duration: 32s !important;
   }
 
   .shell {
