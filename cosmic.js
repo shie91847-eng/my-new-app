@@ -1,4 +1,5 @@
 const COSMIC_LETTERS_KEY = 'tinyStepsLetters';
+const COSMIC_PARTICLE_COUNT = window.innerWidth < 640 ? 28 : 44;
 
 function cosmicById(id) {
   return document.getElementById(id);
@@ -66,7 +67,32 @@ function openWhisper() {
 function closeWhisper() {
   const dialog = cosmicById('whisperDialog');
   document.body.classList.remove('cosmic-writing');
+  document.body.classList.remove('cosmic-has-words');
   if (dialog?.open) dialog.close();
+}
+
+function createCosmicParticles() {
+  const layer = cosmicById('cosmicParticles');
+  if (!layer) return;
+  layer.innerHTML = '';
+
+  for (let i = 0; i < COSMIC_PARTICLE_COUNT; i += 1) {
+    const particle = document.createElement('span');
+    particle.className = 'cosmic-particle';
+
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 120 + Math.random() * (window.innerWidth < 640 ? 230 : 340);
+    const x = Math.cos(angle) * distance;
+    const y = Math.sin(angle) * distance - 120 - Math.random() * 110;
+
+    particle.style.setProperty('--x', `${x.toFixed(1)}px`);
+    particle.style.setProperty('--y', `${y.toFixed(1)}px`);
+    particle.style.setProperty('--size', `${(3 + Math.random() * 8).toFixed(1)}px`);
+    particle.style.setProperty('--scale', `${(0.72 + Math.random() * 1.5).toFixed(2)}`);
+    particle.style.setProperty('--duration', `${(2.5 + Math.random() * 1.4).toFixed(2)}s`);
+    particle.style.setProperty('--delay', `${(Math.random() * 0.58).toFixed(2)}s`);
+    layer.appendChild(particle);
+  }
 }
 
 function releaseToUniverse() {
@@ -79,12 +105,16 @@ function releaseToUniverse() {
   }
 
   input.value = '';
+  createCosmicParticles();
   closeWhisper();
+
+  overlay?.classList.remove('is-active');
+  void overlay?.offsetWidth;
   overlay?.classList.add('is-active');
 
   window.setTimeout(() => {
     overlay?.classList.remove('is-active');
-  }, 1850);
+  }, 3900);
 }
 
 function saveLetter() {
@@ -110,15 +140,22 @@ function clearLetters() {
   renderLetters();
 }
 
+function updateWritingAtmosphere() {
+  const input = cosmicById('whisperInput');
+  document.body.classList.toggle('cosmic-has-words', Boolean(input?.value.trim()));
+}
+
 function initCosmicWhispers() {
   cosmicById('openWhisperBtn')?.addEventListener('click', openWhisper);
   cosmicById('closeWhisperBtn')?.addEventListener('click', closeWhisper);
   cosmicById('releaseBtn')?.addEventListener('click', releaseToUniverse);
   cosmicById('saveLetterBtn')?.addEventListener('click', saveLetter);
   cosmicById('clearLettersBtn')?.addEventListener('click', clearLetters);
+  cosmicById('whisperInput')?.addEventListener('input', updateWritingAtmosphere);
 
   cosmicById('whisperDialog')?.addEventListener('cancel', () => {
     document.body.classList.remove('cosmic-writing');
+    document.body.classList.remove('cosmic-has-words');
   });
 
   renderLetters();
