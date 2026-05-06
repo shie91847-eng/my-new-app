@@ -109,23 +109,23 @@ function createForest() {
   if (!back || !front) return;
   back.innerHTML = '';
   front.innerHTML = '';
-  const width = window.innerWidth;
-  const backCount = Math.max(14, Math.round(width / 58));
-  const frontCount = Math.max(12, Math.round(width / 66));
+  const isSmall = window.innerWidth < 640;
+  const backCount = isSmall ? 7 : 11;
+  const frontCount = isSmall ? 6 : 10;
 
   const makeTree = (layer, depth, index, count) => {
     const tree = document.createElement('span');
     tree.className = 'pine';
     const isFront = depth === 'front';
     const baseLeft = (index / Math.max(count - 1, 1)) * 112 - 6;
-    const tall = isFront ? rand(100, 210) : rand(70, 160);
-    const w = isFront ? rand(70, 128) : rand(58, 108);
+    const tall = isFront ? rand(86, 168) : rand(64, 128);
+    const w = isFront ? rand(82, 150) : rand(68, 126);
     tree.style.setProperty('--left', `${baseLeft + rand(-3, 3)}%`);
-    tree.style.setProperty('--bottom', `${rand(-4, 8)}%`);
+    tree.style.setProperty('--bottom', `${rand(-5, 5)}%`);
     tree.style.setProperty('--h', `${tall}px`);
     tree.style.setProperty('--w', `${w}px`);
-    tree.style.setProperty('--o', `${isFront ? rand(0.34, 0.62) : rand(0.18, 0.38)}`);
-    tree.style.setProperty('--y', `${rand(-2, 12)}px`);
+    tree.style.setProperty('--o', `${isFront ? rand(0.28, 0.50) : rand(0.16, 0.30)}`);
+    tree.style.setProperty('--y', `${rand(-2, 10)}px`);
     layer.appendChild(tree);
   };
 
@@ -137,15 +137,15 @@ function createMist() {
   const layer = byId('mistRibbons');
   if (!layer) return;
   layer.innerHTML = '';
-  const count = window.innerWidth < 640 ? 4 : 6;
+  const count = window.innerWidth < 640 ? 3 : 4;
   for (let i = 0; i < count; i += 1) {
     const ribbon = document.createElement('span');
     ribbon.className = 'ribbon';
-    ribbon.style.setProperty('--top', `${rand(48, 76)}%`);
-    ribbon.style.setProperty('--h', `${rand(34, 72)}px`);
-    ribbon.style.setProperty('--blur', `${rand(6, 11)}px`);
-    ribbon.style.setProperty('--o', `${rand(0.20, 0.42)}`);
-    ribbon.style.setProperty('--d', `${rand(36, 58)}s`);
+    ribbon.style.setProperty('--top', `${rand(50, 74)}%`);
+    ribbon.style.setProperty('--h', `${rand(32, 62)}px`);
+    ribbon.style.setProperty('--blur', `${rand(6, 10)}px`);
+    ribbon.style.setProperty('--o', `${rand(0.18, 0.34)}`);
+    ribbon.style.setProperty('--d', `${rand(42, 64)}s`);
     ribbon.style.setProperty('--delay', `${rand(-24, 0)}s`);
     layer.appendChild(ribbon);
   }
@@ -155,15 +155,15 @@ function createRain() {
   const layer = byId('rainLayer');
   if (!layer) return;
   layer.innerHTML = '';
-  const count = window.innerWidth < 640 ? 18 : 36;
+  const count = window.innerWidth < 640 ? 8 : 14;
   for (let i = 0; i < count; i += 1) {
     const drop = document.createElement('span');
     drop.className = 'drop';
     drop.style.left = `${rand(-4, 110)}%`;
-    drop.style.setProperty('--h', `${rand(12, 28)}px`);
-    drop.style.setProperty('--d', `${rand(5.2, 8.8)}s`);
-    drop.style.setProperty('--delay', `${rand(-9, 0)}s`);
-    drop.style.setProperty('--o', `${rand(0.12, 0.28)}`);
+    drop.style.setProperty('--h', `${rand(8, 18)}px`);
+    drop.style.setProperty('--d', `${rand(7.0, 11.0)}s`);
+    drop.style.setProperty('--delay', `${rand(-10, 0)}s`);
+    drop.style.setProperty('--o', `${rand(0.08, 0.18)}`);
     layer.appendChild(drop);
   }
 }
@@ -332,7 +332,7 @@ function init() {
   regenerateAtmosphere();
   window.addEventListener('resize', () => {
     clearTimeout(window.__tinyStepsAtmosphereTimer);
-    window.__tinyStepsAtmosphereTimer = setTimeout(regenerateAtmosphere, 250);
+    window.__tinyStepsAtmosphereTimer = setTimeout(regenerateAtmosphere, 300);
   });
   setChoice('blockerChoices', 'blocker');
   setChoice('energyChoices', 'energy');
