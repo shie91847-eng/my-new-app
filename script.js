@@ -110,44 +110,43 @@ function createForest() {
   back.innerHTML = '';
   front.innerHTML = '';
   const width = window.innerWidth;
-  const backCount = Math.max(24, Math.round(width / 34));
-  const frontCount = Math.max(22, Math.round(width / 38));
+  const backCount = Math.max(14, Math.round(width / 58));
+  const frontCount = Math.max(12, Math.round(width / 66));
 
-  const makeTree = (layer, depth) => {
+  const makeTree = (layer, depth, index, count) => {
     const tree = document.createElement('span');
     tree.className = 'pine';
     const isFront = depth === 'front';
-    const lowerBand = Math.random() < (isFront ? 0.72 : 0.56);
-    const tall = isFront ? rand(190, 420) : rand(160, 360);
-    const w = isFront ? rand(38, 88) : rand(34, 74);
-    const bottom = lowerBand ? rand(-5, 24) : rand(18, 48);
-    tree.style.setProperty('--left', `${rand(-4, 104)}%`);
-    tree.style.setProperty('--bottom', `${bottom}%`);
+    const baseLeft = (index / Math.max(count - 1, 1)) * 112 - 6;
+    const tall = isFront ? rand(100, 210) : rand(70, 160);
+    const w = isFront ? rand(70, 128) : rand(58, 108);
+    tree.style.setProperty('--left', `${baseLeft + rand(-3, 3)}%`);
+    tree.style.setProperty('--bottom', `${rand(-4, 8)}%`);
     tree.style.setProperty('--h', `${tall}px`);
     tree.style.setProperty('--w', `${w}px`);
-    tree.style.setProperty('--o', `${isFront ? rand(0.48, 0.88) : rand(0.24, 0.55)}`);
-    tree.style.setProperty('--y', `${rand(-8, 18)}px`);
+    tree.style.setProperty('--o', `${isFront ? rand(0.34, 0.62) : rand(0.18, 0.38)}`);
+    tree.style.setProperty('--y', `${rand(-2, 12)}px`);
     layer.appendChild(tree);
   };
 
-  for (let i = 0; i < backCount; i += 1) makeTree(back, 'back');
-  for (let i = 0; i < frontCount; i += 1) makeTree(front, 'front');
+  for (let i = 0; i < backCount; i += 1) makeTree(back, 'back', i, backCount);
+  for (let i = 0; i < frontCount; i += 1) makeTree(front, 'front', i, frontCount);
 }
 
 function createMist() {
   const layer = byId('mistRibbons');
   if (!layer) return;
   layer.innerHTML = '';
-  const count = window.innerWidth < 640 ? 6 : 10;
+  const count = window.innerWidth < 640 ? 4 : 6;
   for (let i = 0; i < count; i += 1) {
     const ribbon = document.createElement('span');
     ribbon.className = 'ribbon';
-    ribbon.style.setProperty('--top', `${rand(16, 82)}%`);
-    ribbon.style.setProperty('--h', `${rand(48, 118)}px`);
-    ribbon.style.setProperty('--blur', `${rand(5, 12)}px`);
-    ribbon.style.setProperty('--o', `${rand(0.32, 0.68)}`);
-    ribbon.style.setProperty('--d', `${rand(18, 38)}s`);
-    ribbon.style.setProperty('--delay', `${rand(-18, 0)}s`);
+    ribbon.style.setProperty('--top', `${rand(48, 76)}%`);
+    ribbon.style.setProperty('--h', `${rand(34, 72)}px`);
+    ribbon.style.setProperty('--blur', `${rand(6, 11)}px`);
+    ribbon.style.setProperty('--o', `${rand(0.20, 0.42)}`);
+    ribbon.style.setProperty('--d', `${rand(36, 58)}s`);
+    ribbon.style.setProperty('--delay', `${rand(-24, 0)}s`);
     layer.appendChild(ribbon);
   }
 }
@@ -156,15 +155,15 @@ function createRain() {
   const layer = byId('rainLayer');
   if (!layer) return;
   layer.innerHTML = '';
-  const count = window.innerWidth < 640 ? 74 : 148;
+  const count = window.innerWidth < 640 ? 18 : 36;
   for (let i = 0; i < count; i += 1) {
     const drop = document.createElement('span');
     drop.className = 'drop';
-    drop.style.left = `${rand(-4, 116)}%`;
-    drop.style.setProperty('--h', `${rand(52, 118)}px`);
-    drop.style.setProperty('--d', `${rand(2.0, 4.6)}s`);
-    drop.style.setProperty('--delay', `${rand(-7, 0)}s`);
-    drop.style.setProperty('--o', `${rand(0.32, 0.74)}`);
+    drop.style.left = `${rand(-4, 110)}%`;
+    drop.style.setProperty('--h', `${rand(12, 28)}px`);
+    drop.style.setProperty('--d', `${rand(5.2, 8.8)}s`);
+    drop.style.setProperty('--delay', `${rand(-9, 0)}s`);
+    drop.style.setProperty('--o', `${rand(0.12, 0.28)}`);
     layer.appendChild(drop);
   }
 }
