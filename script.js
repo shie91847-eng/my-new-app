@@ -1,5 +1,5 @@
 const state = {
-  blocker: 'too-big',
+  blockers: ['too-big'],
   energy: 'soft',
   currentPlan: null,
 };
@@ -103,16 +103,39 @@ const blockerStrategies = {
   },
 };
 
+const blockerPriority = ['little-time', 'low-energy', 'messy', 'fear', 'cant-start', 'too-big'];
+
 function byId(id) { return document.getElementById(id); }
 function pick(list, seed = 0) { return list[Math.abs(seed) % list.length]; }
 function hashText(text) { return [...text].reduce((sum, char) => sum + char.charCodeAt(0), 0); }
 function rand(min, max) { return min + Math.random() * (max - min); }
+function primaryBlocker() {
+  return blockerPriority.find((item) => state.blockers.includes(item)) || state.blockers[0] || 'too-big';
+}
+
+function selectedBlockerLabel() {
+  return state.blockers.map((item) => blockerText[item]).join('、');
+}
 
 function setChoice(containerId, key) {
   const container = byId(containerId);
   container.addEventListener('click', (event) => {
     const button = event.target.closest('button');
     if (!button) return;
+
+    if (key === 'blockers') {
+      const value = button.dataset.value;
+      const exists = state.blockers.includes(value);
+      if (exists && state.blockers.length > 1) {
+        state.blockers = state.blockers.filter((item) => item !== value);
+        button.classList.remove('is-active');
+      } else if (!exists) {
+        state.blockers.push(value);
+        button.classList.add('is-active');
+      }
+      return;
+    }
+
     container.querySelectorAll('button').forEach((item) => item.classList.remove('is-active'));
     button.classList.add('is-active');
     state[key] = button.dataset.value;
@@ -240,15 +263,22 @@ function buildPriorityNote(hints) {
   return '先让事情出现一个可继续的形状。';
 }
 
+function buildBlockerBlend() {
+  if (state.blockers.length <= 1) return blockerStrategies[primaryBlocker()].intro;
+  const labels = selectedBlockerLabel();
+  return `现在的阻力不止一种：${labels}。我们先照顾最紧的那一层，再保留一个能继续的小出口。`;
+}
+
 function buildSteps({ task, profile, strategy, hints, seed, mode, taskType }) {
   const actionOne = pick(profile.first, seed);
   const actionTwo = pick(profile.focus, seed + 3);
   const actionThree = pick(profile.close, seed + 7);
   const outcome = chooseMicroOutcome(taskType, hints, profile);
+  const blockers = state.blockers;
 
   let stepOne = `${strategy.principle} 现在先做：${actionOne}。目标是让「${task}」从脑子里落到眼前，而不是立刻完成。`;
-  let stepTwo = `接着用十分钟推进：${actionTwo}。这一段只围绕一个小结果：${outcome}。`;
-  let stepThree = `${actionThree}。结束时写下“下次从这里继续”，避免重新开始的压力。`;
+  let stepTwo = `接着用十分钟推进：${actionTwo}。这一段只围绕一个小结果：${outcome}。如果中途分心，就回到这个小结果。`;
+  let stepThree = `${actionThree}。再补一句“下次从哪里继续”，避免重新开始的压力。`;
 
   if (hints.needsResearch) {
     stepOne = `先限定查找范围：只找和「${task}」最相关的一条资料、一个例子或一个关键词。不要边查边扩散。`;
@@ -269,42 +299,41 @@ function buildSteps({ task, profile, strategy, hints, seed, mode, taskType }) {
 
   if (hints.needsReview) {
     stepOne = `先快速扫一遍「${task}」，只标出最影响结果的一处，不要同时修很多地方。`;
-    stepTwo = `只修这一处，或者补上：${actionTwo}。这样复盘会有落点。`;
+    stepTwo = `只修这一处，或者只补：${actionTwo}。这样复盘会有落点。`;
     stepThree = '收尾时写一句：这一轮改好了什么，下一轮再看什么。';
   }
 
-  if (hints.hasDeadline || hints.needsDelivery) {
+  if (hints.hasDeadline || hints.needsDelivery || blockers.includes('little-time')) {
     stepOne = `先定义“最低可交付版”：哪怕很粗糙，至少需要包含哪一小部分？然后只做这一部分。`;
     stepTwo = `优先做最能减少风险的一步：${actionTwo}。先保证有雏形，再考虑补充细节。`;
     stepThree = '收尾时检查：它是否已经能被提交、展示或继续加工？如果不能，只补最缺的一项。';
   }
 
-  if (hints.hasMany || state.blocker === 'too-big') {
+  if (hints.hasMany || blockers.includes('too-big')) {
     stepOne = `把「${task}」切掉九成，只保留一个小范围：${actionOne}。其余内容先放到“之后再看”。`;
   }
 
-  if (hints.hasBlank || state.blocker === 'cant-start') {
+  if (hints.hasBlank || blockers.includes('cant-start')) {
     stepOne = `先只做进入动作：${actionOne}。打开、拿出、放到眼前，就已经算开始。`;
   }
 
-  if (hints.hasQualityFear || state.blocker === 'fear') {
+  if (hints.hasQualityFear || blockers.includes('fear')) {
     stepOne = `先做一个低标准版本。它可以粗糙、短、不完整；存在，比漂亮更重要。`;
     stepTwo = `只修一处最明显的地方，或者只补：${actionTwo}。不要同时追求漂亮和完整。`;
   }
 
-  if (state.blocker === 'low-energy') {
+  if (blockers.includes('low-energy')) {
     stepOne = `选择最省力的入口：${actionOne}。能做 60 秒也算数。`;
     stepTwo = `如果还有余力，只做一点：${actionTwo}；如果没有，就在这里收住。`;
   }
 
-  if (state.blocker === 'messy') {
-    stepOne = `把关于「${task}」的念头写满两分钟。不分类、不排序，让它先落下来。`;
-    stepTwo = `从刚写下的内容里圈出最轻的一项，再做：${actionTwo}。`;
+  if (blockers.includes('messy')) {
+    stepOne = `先把关于「${task}」的念头写满两分钟。不分类、不排序，让它先落下来。再从里面圈出最轻的一项。`;
+    stepTwo = `只围绕圈出的那一项做：${actionTwo}。这一步的目标不是整理全局，而是让混乱出现一个出口。`;
   }
 
-  if (state.blocker === 'little-time') {
-    stepOne = `先问：如果只有十分钟，「${task}」里最值得保留的一小块是什么？`;
-    stepTwo = `只做这块里的：${actionTwo}。其余部分先不碰。`;
+  if (blockers.length > 1) {
+    stepThree = `${actionThree}。最后写下三个词：做了什么、卡在哪里、下一步是什么。这样多重阻力会被拆开，而不是重新缠在一起。`;
   }
 
   if (state.energy === 'soft') {
@@ -338,19 +367,20 @@ function makePlan(mode = 'normal') {
   const selectedType = byId('taskType').value;
   const taskType = selectedType === 'auto' ? detectType(task) : selectedType;
   const profile = typeProfiles[taskType];
-  const strategy = blockerStrategies[state.blocker];
+  const mainBlocker = primaryBlocker();
+  const strategy = blockerStrategies[mainBlocker];
   const hints = detectTaskHints(task);
-  const seed = hashText(task + taskType + state.blocker + state.energy + mode);
+  const seed = hashText(task + taskType + state.blockers.join('-') + state.energy + mode);
   const steps = buildSteps({ task, profile, strategy, hints, seed, mode, taskType });
   const priority = buildPriorityNote(hints);
 
   return {
     task,
     taskType,
-    blocker: state.blocker,
+    blocker: state.blockers.join(','),
     energy: state.energy,
     mode,
-    intro: `${strategy.intro} ${profile.cue} ${priority} ${energyLine(state.energy)} ${modeTone(mode)}`,
+    intro: `${buildBlockerBlend()} ${profile.cue} ${priority} ${energyLine(state.energy)} ${modeTone(mode)}`,
     title1: strategy.titles[0],
     text1: steps.stepOne,
     title2: strategy.titles[1],
@@ -407,7 +437,8 @@ function renderHistory() {
   history.forEach((item) => {
     const node = template.content.cloneNode(true);
     node.querySelector('.history-task').textContent = item.task;
-    node.querySelector('.history-meta').textContent = `${typeText[item.taskType]} · ${blockerText[item.blocker]} · ${energyText[item.energy]}`;
+    const blockers = (item.blocker || '').split(',').filter(Boolean).map((key) => blockerText[key]).join('、') || '太大';
+    node.querySelector('.history-meta').textContent = `${typeText[item.taskType]} · ${blockers} · ${energyText[item.energy]}`;
     node.querySelector('.reuse-btn').addEventListener('click', () => {
       byId('taskInput').value = item.task;
       byId('taskType').value = item.taskType;
@@ -431,7 +462,7 @@ function init() {
     clearTimeout(window.__tinyStepsAtmosphereTimer);
     window.__tinyStepsAtmosphereTimer = setTimeout(regenerateAtmosphere, 350);
   });
-  setChoice('blockerChoices', 'blocker');
+  setChoice('blockerChoices', 'blockers');
   setChoice('energyChoices', 'energy');
   byId('generateBtn').addEventListener('click', () => renderPlan(makePlan('normal')));
   byId('lighterBtn').addEventListener('click', () => renderPlan(makePlan('lighter')));
