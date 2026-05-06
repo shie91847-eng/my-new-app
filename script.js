@@ -64,38 +64,33 @@ const blockerStrategies = {
   'too-big': {
     intro: '不是你不够努力，是边界太宽。先把整片森林收成一条小径。',
     titles: ['把全部缩成一角', '只走一小段', '留下路标'],
-    frame: '缩小范围',
   },
   'cant-start': {
     intro: '开始不需要状态很好。先让身体到场，心会慢一点跟上。',
     titles: ['只打开入口', '试运行十分钟', '停在好继续的位置'],
-    frame: '降低启动阻力',
   },
   fear: {
     intro: '怕做差时，先允许它粗糙。可修改的东西，必须先存在。',
     titles: ['做一个低标准草稿', '只修一处', '保留可见进展'],
-    frame: '允许粗糙',
   },
   'low-energy': {
     intro: '能量低时，不需要冲刺。只取回一点点掌控感。',
     titles: ['做一个不会失败的动作', '温和推进一点', '及时收住'],
-    frame: '降低消耗',
   },
   messy: {
     intro: '混乱时先别排序。让脑内的雨落到纸面上，再选一滴。',
     titles: ['先清空噪音', '只选一个入口', '写清下一步'],
-    frame: '外化混乱',
   },
   'little-time': {
     intro: '时间少时，不做完整计划。只抓最有回声的一小块。',
     titles: ['锁定关键小块', '做高价值推进', '留下可交接结果'],
-    frame: '抓住关键',
   },
 };
 
 function byId(id) { return document.getElementById(id); }
 function pick(list, seed = 0) { return list[Math.abs(seed) % list.length]; }
 function hashText(text) { return [...text].reduce((sum, char) => sum + char.charCodeAt(0), 0); }
+function rand(min, max) { return min + Math.random() * (max - min); }
 
 function setChoice(containerId, key) {
   const container = byId(containerId);
@@ -115,37 +110,44 @@ function createForest() {
   back.innerHTML = '';
   front.innerHTML = '';
   const width = window.innerWidth;
-  const backCount = Math.max(18, Math.round(width / 48));
-  const frontCount = Math.max(16, Math.round(width / 56));
-  const makeTree = (layer, i, depth) => {
+  const backCount = Math.max(24, Math.round(width / 34));
+  const frontCount = Math.max(22, Math.round(width / 38));
+
+  const makeTree = (layer, depth) => {
     const tree = document.createElement('span');
     tree.className = 'pine';
-    const tall = depth === 'front' ? 150 + Math.random() * 150 : 110 + Math.random() * 130;
-    const w = depth === 'front' ? 32 + Math.random() * 44 : 28 + Math.random() * 36;
+    const isFront = depth === 'front';
+    const lowerBand = Math.random() < (isFront ? 0.72 : 0.56);
+    const tall = isFront ? rand(190, 420) : rand(160, 360);
+    const w = isFront ? rand(38, 88) : rand(34, 74);
+    const bottom = lowerBand ? rand(-5, 24) : rand(18, 48);
+    tree.style.setProperty('--left', `${rand(-4, 104)}%`);
+    tree.style.setProperty('--bottom', `${bottom}%`);
     tree.style.setProperty('--h', `${tall}px`);
     tree.style.setProperty('--w', `${w}px`);
-    tree.style.setProperty('--o', `${depth === 'front' ? 0.52 + Math.random() * 0.34 : 0.28 + Math.random() * 0.28}`);
-    tree.style.setProperty('--y', `${Math.random() * 18}px`);
+    tree.style.setProperty('--o', `${isFront ? rand(0.48, 0.88) : rand(0.24, 0.55)}`);
+    tree.style.setProperty('--y', `${rand(-8, 18)}px`);
     layer.appendChild(tree);
   };
-  for (let i = 0; i < backCount; i += 1) makeTree(back, i, 'back');
-  for (let i = 0; i < frontCount; i += 1) makeTree(front, i, 'front');
+
+  for (let i = 0; i < backCount; i += 1) makeTree(back, 'back');
+  for (let i = 0; i < frontCount; i += 1) makeTree(front, 'front');
 }
 
 function createMist() {
   const layer = byId('mistRibbons');
   if (!layer) return;
   layer.innerHTML = '';
-  const count = window.innerWidth < 640 ? 4 : 7;
+  const count = window.innerWidth < 640 ? 6 : 10;
   for (let i = 0; i < count; i += 1) {
     const ribbon = document.createElement('span');
     ribbon.className = 'ribbon';
-    ribbon.style.setProperty('--top', `${24 + Math.random() * 54}%`);
-    ribbon.style.setProperty('--h', `${40 + Math.random() * 76}px`);
-    ribbon.style.setProperty('--blur', `${7 + Math.random() * 10}px`);
-    ribbon.style.setProperty('--o', `${0.26 + Math.random() * 0.38}`);
-    ribbon.style.setProperty('--d', `${20 + Math.random() * 22}s`);
-    ribbon.style.setProperty('--delay', `${Math.random() * -16}s`);
+    ribbon.style.setProperty('--top', `${rand(16, 82)}%`);
+    ribbon.style.setProperty('--h', `${rand(48, 118)}px`);
+    ribbon.style.setProperty('--blur', `${rand(5, 12)}px`);
+    ribbon.style.setProperty('--o', `${rand(0.32, 0.68)}`);
+    ribbon.style.setProperty('--d', `${rand(18, 38)}s`);
+    ribbon.style.setProperty('--delay', `${rand(-18, 0)}s`);
     layer.appendChild(ribbon);
   }
 }
@@ -154,15 +156,15 @@ function createRain() {
   const layer = byId('rainLayer');
   if (!layer) return;
   layer.innerHTML = '';
-  const count = window.innerWidth < 640 ? 52 : 118;
+  const count = window.innerWidth < 640 ? 74 : 148;
   for (let i = 0; i < count; i += 1) {
     const drop = document.createElement('span');
     drop.className = 'drop';
-    drop.style.left = `${Math.random() * 116}%`;
-    drop.style.setProperty('--h', `${42 + Math.random() * 96}px`);
-    drop.style.setProperty('--d', `${2.2 + Math.random() * 4.3}s`);
-    drop.style.setProperty('--delay', `${Math.random() * -7}s`);
-    drop.style.setProperty('--o', `${0.24 + Math.random() * 0.52}`);
+    drop.style.left = `${rand(-4, 116)}%`;
+    drop.style.setProperty('--h', `${rand(52, 118)}px`);
+    drop.style.setProperty('--d', `${rand(2.0, 4.6)}s`);
+    drop.style.setProperty('--delay', `${rand(-7, 0)}s`);
+    drop.style.setProperty('--o', `${rand(0.32, 0.74)}`);
     layer.appendChild(drop);
   }
 }
@@ -195,9 +197,9 @@ function makePlan(mode = 'normal') {
   const strategy = blockerStrategies[state.blocker];
   const seed = hashText(task + taskType + state.blocker + state.energy + mode);
 
-  let actionOne = pick(profile.first, seed);
-  let actionTwo = pick(profile.focus, seed + 3);
-  let actionThree = pick(profile.close, seed + 7);
+  const actionOne = pick(profile.first, seed);
+  const actionTwo = pick(profile.focus, seed + 3);
+  const actionThree = pick(profile.close, seed + 7);
 
   let stepOne = `${actionOne}。先不要判断成果，只让「${task}」从脑子里落到眼前。`;
   let stepTwo = `${actionTwo}。过程中只追踪一个问题：下一步还能不能再小一点？`;
@@ -230,7 +232,7 @@ function makePlan(mode = 'normal') {
 
   if (state.energy === 'soft') {
     stepTwo = `只做 6 到 10 分钟。${actionTwo}，有一点痕迹就停。`;
-    stepThree = `收尾只写一句：我已经开始过。然后留下下次继续的位置。`;
+    stepThree = '收尾只写一句：我已经开始过。然后留下下次继续的位置。';
   }
   if (state.energy === 'deep') {
     stepTwo = `${actionTwo}，再加一个轻检查：看一个例子、对一个标准，或把结果读一遍。`;
