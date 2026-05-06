@@ -13,10 +13,11 @@
 <body>
   <div class="atmosphere" aria-hidden="true">
     <div class="sky-wash"></div>
-    <div class="forest forest-back"></div>
-    <div class="forest forest-mid"></div>
-    <div class="mist mist-one"></div>
-    <div class="mist mist-two"></div>
+    <div class="distant-light"></div>
+    <div class="pine-layer pine-layer-back" id="pineLayerBack"></div>
+    <div class="pine-layer pine-layer-front" id="pineLayerFront"></div>
+    <div class="fog-bank fog-back"></div>
+    <div class="mist-ribbons" id="mistRibbons"></div>
     <div class="rain-layer" id="rainLayer"></div>
     <div class="glass-noise"></div>
   </div>
@@ -26,7 +27,7 @@
       <div class="eyebrow">Tiny Steps</div>
       <h1 id="page-title">把卡住的事，拆成一个能开始的小动作。</h1>
       <p class="lead">先不用变得完美。让混乱慢慢落下，只留下下一步。</p>
-      <p class="micro-guide">当任务太大，大脑会本能地退后。我们先降低入口，而不是提高要求。</p>
+      <p class="micro-guide">当任务太大，大脑会本能地后退。我们先降低入口，而不是提高要求。</p>
     </section>
 
     <section class="workspace" aria-label="任务拆解器">
@@ -39,7 +40,7 @@
 
         <label class="task-field" for="taskInput">
           <span>把它放下来</span>
-          <textarea id="taskInput" rows="4" placeholder="例如：我要复习解剖，但内容太多，不知道从哪里开始。"></textarea>
+          <textarea id="taskInput" rows="4" placeholder="例如：我有一个报告要写，但不知道从哪里开始。"></textarea>
         </label>
 
         <div class="field-group">
