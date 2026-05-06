@@ -1,0 +1,161 @@
+.mood-wrap,
+.calendar-wrap {
+  margin-top: 18px;
+  padding: 26px;
+}
+
+.mood-tools,
+.calendar-head,
+.mood-picker {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mood-tools {
+  justify-content: space-between;
+  margin: 18px 0 16px;
+}
+
+.mood-filters,
+.calendar-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mood-filter,
+.month-btn,
+.mood-pill,
+.more-cards-btn {
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  background: rgba(255,255,255,.035);
+  color: rgba(31, 52, 72, .84);
+  cursor: pointer;
+  font: inherit;
+  padding: 10px 14px;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.mood-filter:hover,
+.month-btn:hover,
+.mood-pill:hover,
+.more-cards-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.44);
+  box-shadow: 0 8px 20px rgba(18, 42, 68, .055);
+}
+
+.mood-filter.is-active,
+.mood-pill.is-active {
+  background: linear-gradient(135deg, rgba(178,207,238,.18), rgba(207,184,238,.14), rgba(255,226,154,.10));
+  border-color: rgba(255,255,255,.46);
+  color: #152d48;
+}
+
+.mood-search {
+  width: min(260px, 100%);
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.035);
+  color: var(--ink);
+  font: inherit;
+  padding: 0 15px;
+  outline: none;
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.comfort-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 24px;
+  background: rgba(255,255,255,.028);
+  padding: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 12px 28px rgba(20, 42, 58, .032);
+}
+
+.comfort-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 12% 8%, rgba(255,255,255,.24), transparent 30%), radial-gradient(circle at 88% 18%, rgba(255,226,154,.12), transparent 28%);
+  pointer-events: none;
+}
+
+.comfort-card > * { position: relative; z-index: 1; }
+.comfort-card h3 { margin: 0 0 8px; font-family: "Noto Serif SC", serif; font-size: 20px; letter-spacing: -.02em; }
+.card-tag { display: inline-block; margin-bottom: 10px; color: rgba(62,94,118,.78); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.comfort-card p { margin: 0; color: rgba(32, 50, 68, .82); line-height: 1.86; font-size: 14px; }
+.more-cards-btn { display: block; margin: 18px auto 0; padding: 12px 20px; }
+
+.calendar-head { justify-content: space-between; margin-bottom: 16px; }
+.month-title { margin: 8px 0 0; font-family: "Noto Serif SC", serif; font-size: 24px; letter-spacing: -.025em; }
+.week-row,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.week-row {
+  margin-bottom: 8px;
+  color: rgba(58, 78, 96, .66);
+  font-size: 12px;
+  text-align: center;
+}
+
+.day-cell {
+  min-height: 72px;
+  border: 1px solid rgba(255,255,255,.17);
+  border-radius: 18px;
+  background: rgba(255,255,255,.026);
+  color: rgba(25, 42, 60, .82);
+  cursor: pointer;
+  padding: 8px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.day-cell:hover,
+.day-cell.is-selected {
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.46);
+  box-shadow: 0 10px 22px rgba(18, 42, 68, .06);
+}
+
+.day-cell.is-muted { opacity: .34; }
+.day-number { font-weight: 700; font-size: 13px; }
+.day-mood { position: absolute; left: 8px; right: 8px; bottom: 8px; font-size: 12px; font-weight: 700; color: rgba(21, 38, 54, .72); }
+.calendar-note { margin: 12px 0 0; color: rgba(43,60,74,.68); font-size: 13px; line-height: 1.7; }
+.mood-picker { margin-top: 16px; }
+.mood-pill { padding: 9px 12px; }
+
+.day-cell[data-mood="低落"] { background: rgba(126, 148, 178, .20); }
+.day-cell[data-mood="紧绷"] { background: rgba(150, 132, 184, .24); }
+.day-cell[data-mood="疲惫"] { background: rgba(154, 174, 190, .22); }
+.day-cell[data-mood="平静"] { background: rgba(162, 204, 220, .24); }
+.day-cell[data-mood="柔软"] { background: rgba(192, 184, 226, .26); }
+.day-cell[data-mood="明亮"] { background: rgba(247, 216, 137, .30); }
+.day-cell[data-mood="充盈"] { background: rgba(153, 202, 174, .28); }
+.day-cell[data-mood="感恩"] { background: rgba(255, 204, 150, .32); }
+
+@media (max-width: 780px) {
+  .mood-grid { grid-template-columns: 1fr; }
+  .mood-tools,
+  .calendar-head { display: block; }
+  .mood-search { width: 100%; margin-top: 12px; }
+  .calendar-actions { margin-top: 12px; }
+  .day-cell { min-height: 58px; border-radius: 14px; padding: 7px; }
+  .day-mood { font-size: 11px; left: 7px; bottom: 6px; }
+}
