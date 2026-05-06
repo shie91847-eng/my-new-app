@@ -1,43 +1,64 @@
 .atmosphere::before {
   background:
-    radial-gradient(ellipse at 22% 50%, rgba(255, 255, 255, 0.34), transparent 34%),
-    radial-gradient(ellipse at 72% 42%, rgba(177, 214, 238, 0.38), transparent 36%),
-    radial-gradient(ellipse at 38% 26%, rgba(183, 158, 226, 0.34), transparent 35%),
-    radial-gradient(ellipse at 66% 72%, rgba(128, 196, 226, 0.30), transparent 38%) !important;
-  opacity: 0.86 !important;
+    radial-gradient(ellipse at 22% 50%, rgba(255, 255, 255, 0.36), transparent 34%),
+    radial-gradient(ellipse at 72% 42%, rgba(164, 210, 240, 0.46), transparent 36%),
+    radial-gradient(ellipse at 38% 26%, rgba(192, 162, 235, 0.44), transparent 35%),
+    radial-gradient(ellipse at 66% 72%, rgba(130, 198, 232, 0.34), transparent 38%) !important;
+  opacity: 0.92 !important;
 }
 
 .atmosphere::after {
   background:
-    radial-gradient(circle at 20% 10%, rgba(189, 166, 230, 0.34), transparent 29%),
-    radial-gradient(circle at 82% 16%, rgba(144, 199, 232, 0.34), transparent 34%),
-    radial-gradient(circle at 50% 66%, rgba(162, 208, 218, 0.24), transparent 38%) !important;
+    radial-gradient(circle at 20% 10%, rgba(196, 168, 236, 0.42), transparent 30%),
+    radial-gradient(circle at 82% 16%, rgba(139, 202, 236, 0.42), transparent 35%),
+    radial-gradient(circle at 50% 66%, rgba(168, 213, 224, 0.28), transparent 39%) !important;
 }
 
 .fog-bank {
-  opacity: 0.56 !important;
+  opacity: 0.62 !important;
   background:
-    radial-gradient(ellipse at 16% 58%, rgba(255,255,255,.48), transparent 56%),
-    radial-gradient(ellipse at 48% 50%, rgba(222,232,250,.46), transparent 58%),
-    radial-gradient(ellipse at 76% 55%, rgba(199,224,240,.40), transparent 60%) !important;
+    radial-gradient(ellipse at 16% 58%, rgba(255,255,255,.52), transparent 56%),
+    radial-gradient(ellipse at 48% 50%, rgba(224,232,252,.50), transparent 58%),
+    radial-gradient(ellipse at 76% 55%, rgba(198,226,244,.44), transparent 60%) !important;
 }
 
 .ribbon {
   background:
-    radial-gradient(ellipse at 18% 50%, rgba(255,255,255,.58), transparent 44%),
-    radial-gradient(ellipse at 56% 50%, rgba(221,226,252,.48), transparent 50%),
-    radial-gradient(ellipse at 78% 50%, rgba(187,222,242,.34), transparent 50%),
-    linear-gradient(90deg, transparent, rgba(255,255,255,.38), rgba(205,218,248,.32), transparent) !important;
-  opacity: var(--o, .56) !important;
+    radial-gradient(ellipse at 18% 50%, rgba(255,255,255,.62), transparent 44%),
+    radial-gradient(ellipse at 56% 50%, rgba(225,228,255,.54), transparent 50%),
+    radial-gradient(ellipse at 78% 50%, rgba(187,224,246,.42), transparent 50%),
+    linear-gradient(90deg, transparent, rgba(255,255,255,.44), rgba(207,219,251,.38), transparent) !important;
+  opacity: var(--o, .64) !important;
 }
 
-body.cosmic-writing .atmosphere::before,
+body.cosmic-has-words .atmosphere::before,
+body.cosmic-writing .atmosphere::before {
+  opacity: 1 !important;
+  animation-duration: 4.6s !important;
+}
+
+body.cosmic-has-words .atmosphere::after,
 body.cosmic-writing .atmosphere::after {
-  animation-duration: 4.8s !important;
+  opacity: 1 !important;
+  animation-duration: 4.2s !important;
 }
 
+body.cosmic-has-words .fog-bank,
 body.cosmic-writing .fog-bank {
-  opacity: 0.68 !important;
+  opacity: 0.76 !important;
+  animation-duration: 8.2s !important;
+}
+
+body.cosmic-has-words .ribbon,
+body.cosmic-writing .ribbon {
+  opacity: var(--o, .74) !important;
+  filter: blur(var(--blur, 7px)) saturate(1.12) !important;
+}
+
+body.cosmic-has-words .distant-light,
+body.cosmic-writing .distant-light {
+  opacity: .58 !important;
+  filter: blur(16px) saturate(1.12) !important;
 }
 
 .whisper-wrap {
@@ -61,10 +82,10 @@ body.cosmic-writing .fog-bank {
 
 .whisper-copy p {
   margin: 0;
-  max-width: 620px;
-  color: rgba(43, 60, 74, .72);
+  max-width: 650px;
+  color: rgba(35, 52, 70, .72);
   font-size: 13px;
-  line-height: 1.8;
+  line-height: 1.86;
 }
 
 .secondary-btn,
@@ -80,7 +101,7 @@ body.cosmic-writing .fog-bank {
   border: 0;
   padding: 14px 22px;
   color: white;
-  background: linear-gradient(135deg, #6a8bab, #8879bf);
+  background: linear-gradient(135deg, #5f83aa, #8873bd);
   box-shadow: 0 14px 32px rgba(55, 75, 116, .20);
   font-weight: 700;
   white-space: nowrap;
@@ -113,8 +134,8 @@ body.cosmic-writing .fog-bank {
 }
 
 .text-btn {
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.20);
+  background: rgba(255,255,255,.024);
   color: var(--blue-deep);
   padding: 10px 15px;
 }
@@ -126,11 +147,11 @@ body.cosmic-writing .fog-bank {
 }
 
 .letter-item {
-  border: 1px solid rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.18);
   border-radius: 22px;
   padding: 16px;
-  background: rgba(255,255,255,.035);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
+  background: rgba(255,255,255,.026);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 .letter-date {
@@ -143,41 +164,45 @@ body.cosmic-writing .fog-bank {
 
 .letter-text {
   margin: 0;
-  color: rgba(36, 54, 68, .82);
-  line-height: 1.75;
+  color: rgba(30, 48, 66, .84);
+  line-height: 1.78;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
 .whisper-dialog {
   width: min(640px, calc(100% - 28px));
-  border: 1px solid rgba(255,255,255,.28);
+  border: 1px solid rgba(255,255,255,.42);
   border-radius: 30px;
   padding: 0;
   color: var(--ink);
-  background: rgba(237, 244, 252, .86);
-  box-shadow: 0 28px 90px rgba(19, 38, 56, .26);
+  background: rgba(238, 246, 253, .58);
+  box-shadow: 0 28px 90px rgba(12, 28, 48, .28);
   overflow: hidden;
 }
 
 .whisper-dialog::backdrop {
-  background: rgba(22, 35, 58, .28);
-  backdrop-filter: blur(3px);
+  background: rgba(14, 26, 48, .18);
+  backdrop-filter: blur(5px) saturate(1.08);
 }
 
 .whisper-panel {
   position: relative;
   padding: 28px;
   background:
-    radial-gradient(circle at 16% 8%, rgba(190, 166, 230, .30), transparent 34%),
-    radial-gradient(circle at 82% 18%, rgba(151, 207, 238, .32), transparent 36%),
-    rgba(255,255,255,.18);
+    radial-gradient(circle at 14% 6%, rgba(198, 171, 238, .26), transparent 36%),
+    radial-gradient(circle at 84% 16%, rgba(151, 210, 244, .28), transparent 38%),
+    linear-gradient(145deg, rgba(255,255,255,.30), rgba(255,255,255,.10));
+  backdrop-filter: blur(2px) saturate(1.08);
+  -webkit-backdrop-filter: blur(2px) saturate(1.08);
 }
 
 .whisper-panel h2 {
   margin: 8px 0 14px;
   font-family: "Noto Serif SC", serif;
-  font-size: 25px;
+  font-size: clamp(26px, 5.8vw, 42px);
+  line-height: 1.25;
+  letter-spacing: -0.055em;
 }
 
 .close-btn {
@@ -187,8 +212,8 @@ body.cosmic-writing .fog-bank {
   width: 38px;
   height: 38px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.28);
-  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.38);
+  background: rgba(255,255,255,.12);
   cursor: pointer;
   font-size: 24px;
   line-height: 1;
@@ -197,15 +222,20 @@ body.cosmic-writing .fog-bank {
 
 #whisperInput {
   min-height: 190px;
-  background: rgba(255,255,255,.18) !important;
-  border-color: rgba(255,255,255,.30) !important;
+  background: rgba(255,255,255,.12) !important;
+  border-color: rgba(255,255,255,.38) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 12px 28px rgba(14, 33, 54, .045) !important;
+}
+
+#whisperInput::placeholder {
+  color: rgba(42, 58, 74, .38);
 }
 
 .whisper-hint {
   margin: 10px 0 0;
-  color: rgba(54, 72, 88, .68);
-  font-size: 12px;
-  line-height: 1.7;
+  color: rgba(38, 56, 74, .68);
+  font-size: 12.5px;
+  line-height: 1.78;
 }
 
 .dialog-actions {
@@ -217,16 +247,16 @@ body.cosmic-writing .fog-bank {
 }
 
 .cosmic-btn {
-  border: 1px solid rgba(255,255,255,.26);
+  border: 1px solid rgba(255,255,255,.34);
   padding: 12px 18px;
   color: #314866;
-  background: rgba(255,255,255,.20);
+  background: rgba(255,255,255,.16);
 }
 
 .cosmic-btn.primary {
   border: 0;
   color: white;
-  background: linear-gradient(135deg, #566f9b, #8977bd);
+  background: linear-gradient(135deg, #526f9d, #8b73be);
   font-weight: 700;
 }
 
@@ -239,11 +269,13 @@ body.cosmic-writing .fog-bank {
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
+  overflow: hidden;
   background:
-    radial-gradient(circle at 50% 45%, rgba(189, 166, 230, .30), transparent 34%),
-    radial-gradient(circle at 54% 50%, rgba(149, 207, 238, .24), transparent 42%),
-    rgba(12, 22, 42, .26);
-  transition: opacity .35s ease, visibility .35s ease;
+    radial-gradient(circle at 50% 42%, rgba(219, 205, 255, .38), transparent 22%),
+    radial-gradient(circle at 22% 24%, rgba(152, 214, 247, .30), transparent 34%),
+    radial-gradient(circle at 78% 76%, rgba(199, 170, 240, .28), transparent 36%),
+    rgba(8, 18, 38, .34);
+  transition: opacity .42s ease, visibility .42s ease;
 }
 
 .cosmic-overlay.is-active {
@@ -251,54 +283,152 @@ body.cosmic-writing .fog-bank {
   visibility: visible;
 }
 
+.cosmic-overlay::before,
+.cosmic-overlay::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(76vw, 520px);
+  height: min(76vw, 520px);
+  border-radius: 999px;
+  transform: translate(-50%, -50%) scale(.28);
+  border: 1px solid rgba(232, 238, 255, .48);
+  box-shadow: 0 0 72px rgba(190, 210, 255, .38), inset 0 0 50px rgba(255,255,255,.16);
+  opacity: 0;
+}
+
+.cosmic-overlay.is-active::before {
+  animation: universeRing 3.8s cubic-bezier(.16, .84, .32, 1) both;
+}
+
+.cosmic-overlay.is-active::after {
+  animation: universeRing 3.8s cubic-bezier(.16, .84, .32, 1) .38s both;
+}
+
+.cosmic-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cosmic-particle {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: var(--size, 7px);
+  height: var(--size, 7px);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255,255,255,.98), rgba(214,222,255,.78) 42%, rgba(151,207,245,.10) 72%, transparent 76%);
+  box-shadow: 0 0 14px rgba(230,236,255,.88), 0 0 34px rgba(169,210,246,.42);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+
+.cosmic-overlay.is-active .cosmic-particle {
+  animation: particleRelease var(--duration, 3s) cubic-bezier(.18, .74, .22, 1) var(--delay, 0s) both;
+}
+
 .cosmic-message {
-  width: min(430px, calc(100% - 36px));
+  position: relative;
+  z-index: 2;
+  width: min(470px, calc(100% - 36px));
   text-align: center;
   color: white;
   text-shadow: 0 1px 18px rgba(10, 20, 40, .32);
-  animation: cosmicRise 1.8s ease both;
+  opacity: 0;
+  transform: translateY(18px) scale(.98);
+}
+
+.cosmic-overlay.is-active .cosmic-message {
+  animation: cosmicMessage 3.8s ease both;
 }
 
 .cosmic-star {
+  position: relative;
   display: block;
-  width: 78px;
-  height: 78px;
+  width: 92px;
+  height: 92px;
   margin: 0 auto 18px;
   border-radius: 999px;
   background:
-    radial-gradient(circle at 36% 32%, rgba(255,255,255,.98), rgba(213,220,255,.70) 34%, rgba(160,193,238,.36) 62%, transparent 70%);
-  box-shadow: 0 0 22px rgba(221, 226, 255, .72), 0 0 66px rgba(162, 207, 238, .48);
-  animation: starRelease 1.8s ease both;
+    radial-gradient(circle at 36% 32%, rgba(255,255,255,.98), rgba(226,226,255,.78) 30%, rgba(168,201,245,.42) 58%, transparent 72%);
+  box-shadow: 0 0 28px rgba(231, 234, 255, .86), 0 0 88px rgba(162, 207, 238, .58);
+  opacity: 0;
+}
+
+.cosmic-star::before,
+.cosmic-star::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 132px;
+  height: 1px;
+  transform: translate(-50%, -50%) rotate(22deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.92), transparent);
+  filter: blur(.4px);
+}
+
+.cosmic-star::after {
+  transform: translate(-50%, -50%) rotate(112deg);
+  width: 98px;
+}
+
+.cosmic-overlay.is-active .cosmic-star {
+  animation: starRelease 3.6s cubic-bezier(.18, .8, .26, 1) both;
 }
 
 .cosmic-message h2 {
   margin: 0 0 10px;
   font-family: "Noto Serif SC", serif;
-  font-size: 28px;
+  font-size: clamp(27px, 7vw, 36px);
+  letter-spacing: -0.04em;
 }
 
 .cosmic-message p {
-  margin: 0;
-  line-height: 1.85;
-  color: rgba(255,255,255,.88);
+  margin: 0 auto;
+  max-width: 33em;
+  line-height: 1.9;
+  color: rgba(255,255,255,.90);
 }
 
-@keyframes cosmicRise {
-  0% { transform: translateY(22px) scale(.98); opacity: 0; }
-  35% { opacity: 1; }
-  100% { transform: translateY(-28px) scale(1.01); opacity: 0; }
+@keyframes universeRing {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.18); }
+  18% { opacity: .78; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.46); }
+}
+
+@keyframes particleRelease {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+  16% { opacity: .96; }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--x, 0px)), calc(-50% + var(--y, -220px))) scale(var(--scale, 1.2));
+  }
+}
+
+@keyframes cosmicMessage {
+  0% { opacity: 0; transform: translateY(20px) scale(.98); filter: blur(4px); }
+  18% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  74% { opacity: 1; transform: translateY(-8px) scale(1.01); filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-34px) scale(1.02); filter: blur(6px); }
 }
 
 @keyframes starRelease {
-  0% { transform: translateY(40px) scale(.72); opacity: 0; }
-  35% { opacity: 1; }
-  100% { transform: translateY(-70px) scale(1.18); opacity: 0; }
+  0% { transform: translateY(48px) scale(.58) rotate(0deg); opacity: 0; }
+  20% { opacity: 1; }
+  58% { transform: translateY(-18px) scale(1.08) rotate(32deg); opacity: 1; }
+  100% { transform: translateY(-120px) scale(1.34) rotate(80deg); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cosmic-message,
-  .cosmic-star {
+  .cosmic-star,
+  .cosmic-overlay::before,
+  .cosmic-overlay::after,
+  .cosmic-particle {
     animation-duration: .01ms !important;
+    animation-delay: 0s !important;
   }
 }
 
@@ -313,7 +443,10 @@ body.cosmic-writing .fog-bank {
   .letters-head { display: block; }
   .secondary-btn { margin-top: 16px; width: 100%; }
   .letters-list { grid-template-columns: 1fr; }
+  .whisper-dialog { background: rgba(238, 246, 253, .50); }
   .whisper-panel { padding: 24px 18px 20px; }
   .dialog-actions { justify-content: stretch; }
   .cosmic-btn { flex: 1; }
+  .cosmic-overlay::before,
+  .cosmic-overlay::after { width: 92vw; height: 92vw; }
 }
