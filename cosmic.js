@@ -17,6 +17,11 @@ function setLetters(items) {
   localStorage.setItem(COSMIC_LETTERS_KEY, JSON.stringify(items.slice(0, 12)));
 }
 
+function setCosmicIntensity(value) {
+  const safeValue = Math.max(0, Math.min(1, value));
+  document.documentElement.style.setProperty('--cosmic-intensity', safeValue.toFixed(2));
+}
+
 function formatLetterDate(iso) {
   return new Date(iso).toLocaleString('zh-CN', {
     month: 'short',
@@ -56,6 +61,7 @@ function openWhisper() {
   const dialog = cosmicById('whisperDialog');
   const input = cosmicById('whisperInput');
   document.body.classList.add('cosmic-writing');
+  setCosmicIntensity(input?.value.trim() ? 0.45 : 0.22);
   if (dialog && typeof dialog.showModal === 'function') {
     dialog.showModal();
   } else if (dialog) {
@@ -68,6 +74,7 @@ function closeWhisper() {
   const dialog = cosmicById('whisperDialog');
   document.body.classList.remove('cosmic-writing');
   document.body.classList.remove('cosmic-has-words');
+  setCosmicIntensity(0);
   if (dialog?.open) dialog.close();
 }
 
@@ -107,6 +114,7 @@ function releaseToUniverse() {
   input.value = '';
   createCosmicParticles();
   closeWhisper();
+  setCosmicIntensity(0.85);
 
   overlay?.classList.remove('is-active');
   void overlay?.offsetWidth;
@@ -114,6 +122,7 @@ function releaseToUniverse() {
 
   window.setTimeout(() => {
     overlay?.classList.remove('is-active');
+    setCosmicIntensity(0);
   }, 3900);
 }
 
@@ -142,7 +151,10 @@ function clearLetters() {
 
 function updateWritingAtmosphere() {
   const input = cosmicById('whisperInput');
-  document.body.classList.toggle('cosmic-has-words', Boolean(input?.value.trim()));
+  const length = input?.value.trim().length || 0;
+  const intensity = length ? Math.min(1, 0.34 + length / 180) : 0.22;
+  document.body.classList.toggle('cosmic-has-words', Boolean(length));
+  setCosmicIntensity(intensity);
 }
 
 function initCosmicWhispers() {
@@ -156,6 +168,7 @@ function initCosmicWhispers() {
   cosmicById('whisperDialog')?.addEventListener('cancel', () => {
     document.body.classList.remove('cosmic-writing');
     document.body.classList.remove('cosmic-has-words');
+    setCosmicIntensity(0);
   });
 
   renderLetters();
