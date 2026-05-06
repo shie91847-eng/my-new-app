@@ -11,59 +11,64 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="aurora" aria-hidden="true">
-    <span class="orb orb-a"></span>
-    <span class="orb orb-b"></span>
-    <span class="orb orb-c"></span>
-    <span class="grid-glow"></span>
+  <div class="atmosphere" aria-hidden="true">
+    <div class="sky-wash"></div>
+    <div class="forest forest-back"></div>
+    <div class="forest forest-mid"></div>
+    <div class="mist mist-one"></div>
+    <div class="mist mist-two"></div>
+    <div class="rain-layer" id="rainLayer"></div>
+    <div class="glass-noise"></div>
   </div>
 
   <main class="shell">
     <section class="hero" aria-labelledby="page-title">
       <div class="eyebrow">Tiny Steps</div>
       <h1 id="page-title">把卡住的事，拆成一个能开始的小动作。</h1>
-      <p class="lead">不催你立刻变高效。先看见阻力，再把任务变轻、变清楚、变得可以开始。</p>
+      <p class="lead">先不用变得完美。让混乱慢慢落下，只留下下一步。</p>
+      <p class="micro-guide">当任务太大，大脑会本能地退后。我们先降低入口，而不是提高要求。</p>
     </section>
 
     <section class="workspace" aria-label="任务拆解器">
       <div class="panel input-panel">
         <div class="panel-head">
           <p class="label">Step 01</p>
-          <h2>你现在卡在哪件事上？</h2>
+          <h2>现在，哪件事停在你面前？</h2>
+          <p class="panel-note">写得不完整也可以。模糊的任务，会在这里被慢慢照亮。</p>
         </div>
 
         <label class="task-field" for="taskInput">
-          <span>写下一个任务，越真实越好</span>
+          <span>把它放下来</span>
           <textarea id="taskInput" rows="4" placeholder="例如：我要复习解剖，但内容太多，不知道从哪里开始。"></textarea>
         </label>
 
         <div class="field-group">
-          <p class="field-title">主要阻力</p>
+          <p class="field-title">它为什么变重了？</p>
           <div class="choice-grid" id="blockerChoices">
-            <button class="choice is-active" data-value="too-big">任务太大</button>
-            <button class="choice" data-value="cant-start">开始不了</button>
-            <button class="choice" data-value="fear">怕做不好</button>
-            <button class="choice" data-value="low-energy">太累了</button>
-            <button class="choice" data-value="messy">脑子很乱</button>
-            <button class="choice" data-value="little-time">时间太少</button>
+            <button class="choice is-active" data-value="too-big">太大</button>
+            <button class="choice" data-value="cant-start">难开始</button>
+            <button class="choice" data-value="fear">怕做差</button>
+            <button class="choice" data-value="low-energy">没力气</button>
+            <button class="choice" data-value="messy">很混乱</button>
+            <button class="choice" data-value="little-time">时间少</button>
           </div>
         </div>
 
         <div class="field-group two-col">
           <div>
-            <p class="field-title">当前能量</p>
+            <p class="field-title">现在的能量</p>
             <div class="segmented" id="energyChoices">
-              <button class="segment is-active" data-value="soft">很低</button>
-              <button class="segment" data-value="steady">普通</button>
-              <button class="segment" data-value="deep">还可以认真做</button>
+              <button class="segment is-active" data-value="soft">微弱</button>
+              <button class="segment" data-value="steady">平稳</button>
+              <button class="segment" data-value="deep">清醒</button>
             </div>
           </div>
           <div>
-            <p class="field-title">任务类型</p>
+            <p class="field-title">任务的方向</p>
             <select id="taskType" aria-label="任务类型">
-              <option value="auto">自动判断</option>
+              <option value="auto">让页面判断</option>
               <option value="study">学习 / 复习</option>
-              <option value="writing">写作 / 论文 / 报告</option>
+              <option value="writing">写作 / 报告</option>
               <option value="life">生活整理</option>
               <option value="creative">创作 / 项目</option>
               <option value="admin">杂事 / 事务</option>
@@ -71,9 +76,11 @@
           </div>
         </div>
 
+        <p class="quiet-hint">不用一次解决全部。一个足够小的入口，也会改变今天的流向。</p>
+
         <div class="actions">
-          <button class="primary-btn" id="generateBtn">生成小步</button>
-          <button class="ghost-btn" id="exampleBtn">放入示例</button>
+          <button class="primary-btn" id="generateBtn">拆成小步</button>
+          <button class="ghost-btn" id="exampleBtn">看看示例</button>
         </div>
       </div>
 
@@ -81,35 +88,36 @@
         <div class="panel-head">
           <p class="label">Step 02</p>
           <h2>今天只需要走到这里</h2>
+          <p class="panel-note">不是催促，是帮你看见一个温和的出口。</p>
         </div>
 
         <div class="result-empty" id="emptyState">
           <div class="breathing-dot"></div>
-          <p>输入任务后，我会把它拆成三个层级：立刻开始、十分钟推进、完成感收尾。</p>
+          <p>任务会被拆成三层：先触碰它，再推进一点，最后轻轻收住。</p>
         </div>
 
         <div class="result" id="result" hidden>
           <div class="result-intro" id="resultIntro"></div>
           <div class="step-card start">
-            <span class="step-kicker">2 分钟启动</span>
+            <span class="step-kicker">First touch</span>
             <h3 id="stepOneTitle"></h3>
             <p id="stepOneText"></p>
           </div>
           <div class="step-card focus">
-            <span class="step-kicker">10 分钟推进</span>
+            <span class="step-kicker">Small focus</span>
             <h3 id="stepTwoTitle"></h3>
             <p id="stepTwoText"></p>
           </div>
           <div class="step-card finish">
-            <span class="step-kicker">完成感收尾</span>
+            <span class="step-kicker">Soft close</span>
             <h3 id="stepThreeTitle"></h3>
             <p id="stepThreeText"></p>
           </div>
 
           <div class="result-actions">
-            <button class="ghost-btn" id="lighterBtn">更轻一点</button>
-            <button class="ghost-btn" id="specificBtn">更具体一点</button>
-            <button class="ghost-btn" id="saveBtn">保存这次</button>
+            <button class="ghost-btn" id="lighterBtn">再轻一点</button>
+            <button class="ghost-btn" id="specificBtn">再清楚一点</button>
+            <button class="ghost-btn" id="saveBtn">保存</button>
           </div>
         </div>
       </div>
@@ -117,8 +125,11 @@
 
     <section class="history-wrap" aria-label="最近的小步记录">
       <div class="section-title">
-        <p class="label">Step 03</p>
-        <h2>最近拆过的小步</h2>
+        <div>
+          <p class="label">Step 03</p>
+          <h2>留下走过的痕迹</h2>
+        </div>
+        <p class="section-note">记录不是压力，只是提醒你：你已经开始过。</p>
       </div>
       <div class="history-list" id="historyList"></div>
     </section>
@@ -128,7 +139,7 @@
     <article class="history-item">
       <p class="history-task"></p>
       <div class="history-meta"></div>
-      <button class="reuse-btn">重新放入</button>
+      <button class="reuse-btn">再次使用</button>
     </article>
   </template>
 
