@@ -6,102 +6,97 @@ const state = {
 };
 
 const blockerText = {
-  'too-big': '任务太大',
-  'cant-start': '开始不了',
-  fear: '怕做不好',
-  'low-energy': '太累了',
-  messy: '脑子很乱',
-  'little-time': '时间太少',
+  'too-big': '太大',
+  'cant-start': '难开始',
+  fear: '怕做差',
+  'low-energy': '没力气',
+  messy: '很混乱',
+  'little-time': '时间少',
 };
 
 const energyText = {
-  soft: '很低能量',
-  steady: '普通能量',
-  deep: '可以认真做',
+  soft: '微弱能量',
+  steady: '平稳能量',
+  deep: '清醒能量',
 };
 
 const typeText = {
-  study: '学习 / 复习',
-  writing: '写作 / 报告',
-  life: '生活整理',
-  creative: '创作 / 项目',
-  admin: '杂事 / 事务',
+  study: '学习',
+  writing: '写作',
+  life: '整理',
+  creative: '创作',
+  admin: '事务',
 };
 
 const typeProfiles = {
   study: {
-    object: '资料',
-    first: '只定位一个最小范围',
-    focus: '把内容变成三个关键词',
-    finish: '用一句话复述刚刚看懂的部分',
-    examples: ['翻到最相关的一页', '圈出三个陌生词', '只做一道相关题'],
+    first: '只选一个最小范围',
+    focus: '把内容压成三个关键词',
+    finish: '留下一句能复述的话',
+    examples: ['翻到最相关的一页', '圈出三个陌生词', '只做一道题'],
   },
   writing: {
-    object: '文档',
-    first: '先写一个不完美标题',
-    focus: '只补三个小标题或三句草稿',
-    finish: '把最顺的一句留下来，其他先不修',
-    examples: ['打开空文档', '写下三个关键词', '先写最容易的一段'],
+    first: '先写一个粗略标题',
+    focus: '只补三句草稿',
+    finish: '保留最顺的一句',
+    examples: ['打开文档', '写下三个关键词', '先写最容易的一段'],
   },
   life: {
-    object: '空间',
-    first: '只处理一个手边区域',
-    focus: '按留下、移走、丢弃分三类',
-    finish: '拍一下整理后的角落，给自己一个结束感',
-    examples: ['只清一个桌角', '只收五样东西', '只处理一个袋子'],
+    first: '只处理一个手边角落',
+    focus: '按留下、移走、丢弃分开',
+    finish: '让一个小区域恢复清爽',
+    examples: ['清一个桌角', '收五样东西', '处理一个袋子'],
   },
   creative: {
-    object: '项目',
-    first: '先做一个粗糙草图或列表',
-    focus: '只推进一个能被看见的小模块',
-    finish: '保存当前版本，不急着打磨全部',
-    examples: ['写下核心想法', '画一个很粗的结构', '先做首页第一屏'],
+    first: '先做一个很粗的轮廓',
+    focus: '只推进一个可见模块',
+    finish: '保存当前版本',
+    examples: ['写下核心想法', '画一个结构', '先做第一屏'],
   },
   admin: {
-    object: '事项',
-    first: '先找出入口和所需材料',
-    focus: '只完成一个可提交或可确认的小步骤',
-    finish: '记录下一步要等什么或问谁',
-    examples: ['打开相关页面', '找到截止时间', '先填最确定的部分'],
+    first: '先找到入口和材料',
+    focus: '只完成一个可确认步骤',
+    finish: '写清下一步等什么',
+    examples: ['打开相关页面', '找到截止时间', '先填确定的部分'],
   },
 };
 
 const blockerStrategies = {
   'too-big': {
-    intro: '它现在不是你不够努力，而是边界太大。我们先把范围收窄到一个可以下手的入口。',
-    title1: '先把全部改成一个角落',
-    title2: '只推进一小段，不追求完整',
-    title3: '用一句话留下完成感',
+    intro: '不是你不够努力，是边界太宽。先把森林收成一条小径。',
+    title1: '把全部缩成一角',
+    title2: '只推进一小段',
+    title3: '留下可继续的痕迹',
   },
   'cant-start': {
-    intro: '开始不了的时候，不要先要求进入状态。先制造一个低阻力动作，让身体比大脑先到场。',
-    title1: '只打开，不立刻做',
-    title2: '给自己一个十分钟试运行',
-    title3: '停在一个下次容易继续的位置',
+    intro: '开始不需要状态很好。先让身体到场，心会慢一点跟上。',
+    title1: '只打开，不立刻完成',
+    title2: '试运行十分钟',
+    title3: '停在容易继续的位置',
   },
   fear: {
-    intro: '怕做不好时，第一步要故意降低标准。先允许它粗糙，才会有东西可以修改。',
-    title1: '先做一个草稿版',
+    intro: '怕做差时，先允许它粗糙。可修改的东西，必须先存在。',
+    title1: '做一个低标准草稿',
     title2: '只修最明显的一处',
     title3: '保留一个可见进展',
   },
   'low-energy': {
-    intro: '能量低的时候，目标不是冲刺，而是轻轻恢复一点掌控感。今天的小步可以很小。',
-    title1: '做一个几乎不会失败的动作',
-    title2: '只维持十分钟的温和推进',
-    title3: '完成后及时收住',
+    intro: '能量低时，不需要冲刺。只取回一点点掌控感。',
+    title1: '做一个不会失败的动作',
+    title2: '温和推进十分钟',
+    title3: '及时收住',
   },
   messy: {
-    intro: '脑子乱的时候，先不要排序。把混乱外化出来，再从里面挑一个最容易开始的点。',
-    title1: '先清空脑内噪音',
-    title2: '只选一个最轻的入口',
-    title3: '把下一步写清楚',
+    intro: '混乱时先别排序。让脑内的雨落到纸面上，再选一滴。',
+    title1: '先清空噪音',
+    title2: '只选最轻的入口',
+    title3: '写清下一步',
   },
   'little-time': {
-    intro: '时间少的时候，不做完整计划。只抓最有收益的一小块，让这段时间真的落地。',
-    title1: '先锁定最关键的小块',
-    title2: '用十分钟做高价值推进',
-    title3: '留下一个可交接的结果',
+    intro: '时间少时，不做完整计划。只抓最有回声的一小块。',
+    title1: '锁定关键小块',
+    title2: '做高价值推进',
+    title3: '留下可交接的结果',
   },
 };
 
@@ -118,6 +113,23 @@ function setChoice(containerId, key) {
   });
 }
 
+function createRain() {
+  const layer = byId('rainLayer');
+  if (!layer) return;
+  layer.innerHTML = '';
+  const count = window.innerWidth < 640 ? 36 : 76;
+  for (let i = 0; i < count; i += 1) {
+    const drop = document.createElement('span');
+    drop.className = 'drop';
+    drop.style.left = `${Math.random() * 112}%`;
+    drop.style.setProperty('--h', `${34 + Math.random() * 72}px`);
+    drop.style.setProperty('--d', `${2.6 + Math.random() * 4.8}s`);
+    drop.style.setProperty('--delay', `${Math.random() * -7}s`);
+    drop.style.setProperty('--o', `${0.16 + Math.random() * 0.38}`);
+    layer.appendChild(drop);
+  }
+}
+
 function detectType(task) {
   const text = task.toLowerCase();
   const rules = [
@@ -132,9 +144,9 @@ function detectType(task) {
 }
 
 function energyLine(energy) {
-  if (energy === 'soft') return '这版会尽量轻，只要求你开始，不要求你表现好。';
-  if (energy === 'steady') return '这版会保留一点推进感，但不会把任务排得太满。';
-  return '这版可以稍微深入一点，但仍然把边界控制在清楚的小范围里。';
+  if (energy === 'soft') return '这版很轻，只负责开始。';
+  if (energy === 'steady') return '这版保留推进，但不把今天排满。';
+  return '这版可以深入一点，但边界依然清楚。';
 }
 
 function makePlan(mode = 'normal') {
@@ -145,34 +157,34 @@ function makePlan(mode = 'normal') {
   const profile = typeProfiles[taskType];
   const strategy = blockerStrategies[state.blocker];
 
-  let stepOne = `${profile.first}：${profile.examples[0]}。先不要判断做得好不好，只让任务从“想象里”落到眼前。`;
-  let stepTwo = `${profile.focus}。如果中途卡住，就只问自己：这里最小的下一步是什么？`;
-  let stepThree = `${profile.finish}。结束时写下“我下次从这里继续”，避免重新开始的压力。`;
+  let stepOne = `${profile.first}：${profile.examples[0]}。不用评价，只让它出现在眼前。`;
+  let stepTwo = `${profile.focus}。如果卡住，只问：下一步最小能小到哪里？`;
+  let stepThree = `${profile.finish}。最后写一句“下次从这里继续”。`;
 
   if (state.blocker === 'messy') {
-    stepOne = `拿一张纸或打开备忘录，把关于「${task}」想到的内容全部倒出来，不分类、不排序，写满 2 分钟就停。`;
+    stepOne = `把关于「${task}」想到的内容写满 2 分钟。不分类，不排序，只让雨落下来。`;
   }
   if (state.blocker === 'fear') {
-    stepOne = `给「${task}」做一个故意不完美的草稿版。目标不是正确，而是先有一个可以修改的东西。`;
+    stepOne = `给「${task}」做一个故意不完美的版本。目标不是正确，是让它可以被修改。`;
   }
   if (state.blocker === 'little-time') {
-    stepOne = `先问：如果只剩 10 分钟，「${task}」里最值得保留的一小块是什么？把其他部分暂时放到旁边。`;
+    stepOne = `只问一句：如果只有 10 分钟，「${task}」里最值得保留的一小块是什么？`;
   }
   if (state.energy === 'soft') {
-    stepTwo = `只做 6 到 10 分钟。选 ${profile.examples[1]}，做到“有一点痕迹”就算数，不需要进入完美状态。`;
+    stepTwo = `只做 6 到 10 分钟。选 ${profile.examples[1]}，有一点痕迹就停。`;
   }
   if (state.energy === 'deep') {
-    stepTwo = `${profile.focus}，然后补一个验证动作：检查一个例子、对照一个标准，或把结果读一遍。`;
+    stepTwo = `${profile.focus}，再做一次轻检查：看一个例子、对一个标准，或读一遍结果。`;
   }
   if (mode === 'lighter') {
-    stepOne = `把「${task}」缩到几乎不会失败：${profile.examples[0]}，只做 60 秒也可以。`;
-    stepTwo = `继续之前先停一下。如果还有力气，再做 ${profile.examples[1]}；没有力气，今天也已经开始了。`;
-    stepThree = '收尾只需要一句话：我已经碰过它了。下次从这个入口继续。';
+    stepOne = `把「${task}」缩到几乎不会失败：${profile.examples[0]}，60 秒也算。`;
+    stepTwo = `还有力气，再做 ${profile.examples[1]}；没有力气，今天已经碰到它了。`;
+    stepThree = '收尾只留一句：我已经开始过。';
   }
   if (mode === 'specific') {
-    stepOne = `设置 2 分钟计时器，打开和「${task}」最相关的页面、文档或空间，并把第一个要看的位置标出来。`;
-    stepTwo = `设置 10 分钟计时器，只执行一个动作：${profile.examples[2]}。过程中不要切换任务。`;
-    stepThree = '最后 1 分钟写下三个词：做了什么、卡在哪里、下一步是什么。';
+    stepOne = `设置 2 分钟，打开和「${task}」最相关的页面、文档或空间，标出第一个位置。`;
+    stepTwo = `设置 10 分钟，只做一件事：${profile.examples[2]}。中途不切换。`;
+    stepThree = '最后写三个词：做了什么、卡在哪里、下一步是什么。';
   }
 
   return {
@@ -220,7 +232,7 @@ function saveCurrent() {
   setHistory([state.currentPlan, ...history.filter((item) => item.task !== state.currentPlan.task)]);
   renderHistory();
   byId('saveBtn').textContent = '已保存';
-  setTimeout(() => { byId('saveBtn').textContent = '保存这次'; }, 1200);
+  setTimeout(() => { byId('saveBtn').textContent = '保存'; }, 1200);
 }
 
 function renderHistory() {
@@ -230,7 +242,7 @@ function renderHistory() {
   if (!history.length) {
     const empty = document.createElement('p');
     empty.className = 'empty-history';
-    empty.textContent = '还没有记录。生成并保存一次后，这里会留下最近的小步。';
+    empty.textContent = '还没有记录。保存一次后，这里会留下最近的小步。';
     list.appendChild(empty);
     return;
   }
@@ -250,6 +262,11 @@ function renderHistory() {
 }
 
 function init() {
+  createRain();
+  window.addEventListener('resize', () => {
+    clearTimeout(window.__tinyStepsRainTimer);
+    window.__tinyStepsRainTimer = setTimeout(createRain, 250);
+  });
   setChoice('blockerChoices', 'blocker');
   setChoice('energyChoices', 'energy');
   byId('generateBtn').addEventListener('click', () => renderPlan(makePlan('normal')));
