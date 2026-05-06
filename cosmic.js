@@ -24,8 +24,9 @@ function setCosmicIntensity(value) {
 
 function formatLetterDate(iso) {
   return new Date(iso).toLocaleString('zh-CN', {
-    month: 'short',
-    day: 'numeric',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
     hour: '2-digit',
     minute: '2-digit',
   });
@@ -144,6 +145,35 @@ function saveLetter() {
   section?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
+function exportLettersAsTxt() {
+  const letters = getLetters();
+  if (!letters.length) return;
+
+  const content = [
+    'Tiny Steps｜心里的微光记录',
+    `导出时间：${formatLetterDate(new Date().toISOString())}`,
+    '',
+    ...letters.slice().reverse().flatMap((letter, index) => [
+      `【${index + 1}】${formatLetterDate(letter.time)}`,
+      letter.text,
+      '',
+      '——',
+      '',
+    ]),
+  ].join('\n');
+
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  const day = new Date().toISOString().slice(0, 10);
+  anchor.href = url;
+  anchor.download = `tiny-steps-notes-${day}.txt`;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
 function clearLetters() {
   localStorage.removeItem(COSMIC_LETTERS_KEY);
   renderLetters();
@@ -162,6 +192,7 @@ function initCosmicWhispers() {
   cosmicById('closeWhisperBtn')?.addEventListener('click', closeWhisper);
   cosmicById('releaseBtn')?.addEventListener('click', releaseToUniverse);
   cosmicById('saveLetterBtn')?.addEventListener('click', saveLetter);
+  cosmicById('exportLettersBtn')?.addEventListener('click', exportLettersAsTxt);
   cosmicById('clearLettersBtn')?.addEventListener('click', clearLetters);
   cosmicById('whisperInput')?.addEventListener('input', updateWritingAtmosphere);
 
