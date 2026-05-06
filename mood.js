@@ -1,4 +1,4 @@
-const MOOD_CARD_STEP = 12;
+const MOOD_CARD_STEP = 5;
 const MOOD_CALENDAR_KEY = 'tinyStepsMoodCalendar';
 const moodById = (id) => document.getElementById(id);
 
@@ -8,7 +8,7 @@ const comfortGroups = [
   { key: '疲惫', hint: '先省力', tone: '疲惫时不适合用意志力硬推。选择最省力的版本：只整理材料，只做一道题，只写三句话。小步不是退让，是在保护持续性，让你明天还有力气回来。' },
   { key: '紧绷', hint: '先松开', tone: '紧绷会让每个任务都像考试。先把身体松下来，再处理事情。你可以给任务设一个短时间边界：十分钟只做一件事，到点就停。边界会让大脑知道它是安全的。' },
   { key: '混乱', hint: '先外化', tone: '混乱时不要在脑子里排序。把所有念头写出来，不分类也没关系。写完后只圈出一个最轻的小入口。外化会减少内耗，让任务从一团雾变成可以选择的路。' },
-  { key: '自责', hint: '先复盘', tone: '自责常常想逼你变好，但它太重了。把攻击换成复盘：发生了什么，哪里可以调整，下一次具体换哪一步。你可以负责，也可以不伤害自己。' },
+  { key: '自责', hint: '先复盘', tone: '自责常常想逼你变好，但它太重了。把苛责换成复盘：发生了什么，哪里可以调整，下一次具体换哪一步。你可以负责，也可以温柔地继续。' },
   { key: '迷茫', hint: '先试走', tone: '迷茫时不必立刻确定完整路线。先选一个低成本试走动作：看一个例子、列两个选项、做一个草稿。试走会带来信息，信息会慢慢替你照亮方向。' },
   { key: '平静', hint: '稳步推进', tone: '平静是很适合推进的状态。你可以比平时多做一点，但仍然保留边界：确定一个小成果，完成后及时收尾。稳定不是一次冲很远，而是每次都知道怎么继续。' }
 ];
@@ -20,7 +20,7 @@ const scenes = [
   ['时间不够', '先做保底版。问自己：最少交出什么，能让后续压力下降一点。'],
   ['脑子很乱', '先清空两分钟，把念头倒出来，再从里面选一个最轻的动作。'],
   ['落后感很强', '把比较收回来。今天的目标不是追上所有人，而是拿回一个具体进度。'],
-  ['被评价刺痛', '把反馈和自我价值分开。能改的记下来，不能吸收的先放到一边。'],
+  ['被评价刺痛', '把反馈和自我价值分开。能改的记下来，暂时不能吸收的先放到一边。'],
   ['复习没状态', '先看目录和标题，不急着背。让大脑知道今天要碰的是哪一小块。'],
   ['写作卡住', '先写口语版。把想法说出来，再慢慢整理成正式表达。'],
   ['杂事堆积', '先列等待项和可行动作。很多压力来自混在一起，而不是事情本身。']
@@ -33,13 +33,18 @@ const endings = [
   '这张卡不是让你立刻变好，而是帮你把状态和任务重新对齐。状态轻时就轻做，状态稳时再推进。你可以用适合今天的方式完成今天。'
 ];
 
-const comfortCards = comfortGroups.flatMap((group, groupIndex) => scenes.map((scene, sceneIndex) => ({
-  id: `${group.key}-${sceneIndex}`,
-  mood: group.key,
-  hint: group.hint,
-  title: `${group.key}｜${scene[0]}`,
-  text: `${group.tone}${scene[1]}把事实、感受和下一步分开：事实是任务现在在哪里；感受是你为什么变重；下一步是一个能被执行的动作。${endings[(groupIndex + sceneIndex) % endings.length]}`
-})));
+const comfortCards = comfortGroups.flatMap((group, groupIndex) => scenes.map((scene, sceneIndex) => {
+  const ending = endings[(groupIndex + sceneIndex) % endings.length];
+  const fullText = `${group.tone}${scene[1]}把事实、感受和下一步分开：事实是任务现在在哪里；感受是你为什么变重；下一步是一个能被执行的动作。${ending}`;
+  return {
+    id: `${group.key}-${sceneIndex}`,
+    mood: group.key,
+    hint: group.hint,
+    title: `${group.key}｜${scene[0]}`,
+    text: fullText,
+    paragraphs: [group.tone, scene[1], '把事实、感受和下一步分开：事实是任务现在在哪里；感受是你为什么变重；下一步是一个能被执行的动作。', ending]
+  };
+}));
 
 let activeMood = '全部';
 let visibleCardCount = MOOD_CARD_STEP;
@@ -98,6 +103,21 @@ function getFilteredCards() {
   });
 }
 
+function openMoodReader(card) {
+  let dialog = moodById('moodReaderDialog');
+  if (!dialog) {
+    dialog = document.createElement('dialog');
+    dialog.id = 'moodReaderDialog';
+    dialog.className = 'mood-reader-dialog';
+    document.body.appendChild(dialog);
+  }
+  const paragraphs = card.paragraphs.map(text => `<p>${text}</p>`).join('');
+  dialog.innerHTML = `<div class="reader-panel"><button class="reader-close" type="button" aria-label="关闭">×</button><p class="label">${card.mood} · ${card.hint}</p><h2>${card.title}</h2><div class="reader-body">${paragraphs}</div></div>`;
+  dialog.querySelector('.reader-close').addEventListener('click', () => dialog.close());
+  if (typeof dialog.showModal === 'function') dialog.showModal();
+  else dialog.setAttribute('open', '');
+}
+
 function renderComfortCards() {
   const grid = moodById('moodGrid');
   const more = moodById('moreCardsBtn');
@@ -107,7 +127,9 @@ function renderComfortCards() {
   cards.slice(0, visibleCardCount).forEach(card => {
     const article = document.createElement('article');
     article.className = 'comfort-card';
-    article.innerHTML = `<span class="card-tag">${card.mood} · ${card.hint}</span><h3>${card.title}</h3><p>${card.text}</p>`;
+    const preview = card.text.length > 88 ? `${card.text.slice(0, 88)}…` : card.text;
+    article.innerHTML = `<span class="card-tag">${card.mood} · ${card.hint}</span><h3>${card.title}</h3><p class="card-preview">${preview}</p><button class="read-card-btn" type="button">进入阅读</button>`;
+    article.querySelector('.read-card-btn').addEventListener('click', () => openMoodReader(card));
     grid.appendChild(article);
   });
   more.hidden = visibleCardCount >= cards.length;
